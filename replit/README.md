@@ -9,7 +9,7 @@
 | Élément | Emplacement |
 |---|---|
 | **Labs** (9, un par fil) et données fournies | [`replit/`](replit/) — voir son [README](replit/README.md) pour le détail |
-| **Présentation** (diapositives, 45 pages) | [`[Formation_Replit/blob/main/replit/formation-replit.htm](https://github.com/abdouLLAHFath/Formation_Replit/blob/main/replit/formation-replit.html)l`](Présentation) |
+| **Présentation** (diapositives, 45 pages) | 
 
 ## Présentation
 
