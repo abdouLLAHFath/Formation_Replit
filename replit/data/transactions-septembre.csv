@@ -1,0 +1,31 @@
+id;date;fournisseur;categorie;montant_eur;piece_jointe;statut
+TX-0901;2026-09-02;Immo Centre SCI;Loyer;1450.00;oui;validee
+TX-0902;2026-09-03;Papeterie du Marché;Fournitures;86.40;oui;validee
+TX-0903;2026-09-03;Studio Lumière SARL;Honoraires;620.00;oui;validee
+TX-0904;2026-09-04;URSSAF;Salaires;3120.50;oui;validee
+TX-0905;2026-09-05;ImprimExpress;Marketing;240.00;oui;validee
+TX-0906;2026-09-06;SNCF Connect;Deplacement;134.20;oui;validee
+TX-0907;2026-09-07;Papeterie du Marché;Fournitures;86.40;oui;validee
+TX-0908;2026-09-08;Traiteur Belleville;Honoraires;980.00;oui;validee
+TX-0909;2026-09-09;Total Energies Pro;Deplacement;76.30;non;soumise
+TX-0910;2026-09-10;Bureau Vallée;Fournitures;54.90;oui;validee
+TX-0911;2026-09-11;Immo Centre SCI;Loyer;1450.00;oui;validee
+TX-0912;2026-09-12;Meta Ads;Marketing;310.00;oui;validee
+TX-0913;2026-09-13;URSSAF;Salaires;2980.00;oui;validee
+TX-0914;2026-09-14;Agence Web Plume;Honoraires;1200.00;oui;validee
+TX-0915;2026-09-15;SNCF Connect;Deplacement;98.70;oui;validee
+TX-0916;2026-09-16;Fleuriste des Halles;Fournitures;145.00;oui;validee
+TX-0917;2026-09-17;Hôtel du Parc;Deplacement;210.00;non;soumise
+TX-0918;2026-09-18;ImprimExpress;Marketing;128.50;oui;validee
+TX-0919;2026-09-19;Fournisseur Inconnu SARL;Fournitures;45000.00;non;soumise
+TX-0920;2026-09-20;Papeterie du Marché;Fournitures;38.20;oui;validee
+TX-0921;2026-09-21;Traiteur Belleville;Honoraires;540.00;oui;validee
+TX-0922;2026-09-22;URSSAF;Salaires;3050.00;oui;validee
+TX-0923;2026-09-22;Studio Lumière SARL;Honoraires;410.00;oui;refusee
+TX-0924;2026-09-23;SNCF Connect;Deplacement;112.40;oui;validee
+TX-0925;2026-09-24;Bureau Vallée;Fournitures;61.75;oui;validee
+TX-0926;2026-09-25;Meta Ads;Marketing;280.00;oui;validee
+TX-0927;2026-09-26;Fleuriste des Halles;Fournitures;98.50;oui;validee
+TX-0928;2026-09-27;Agence Web Plume;Honoraires;350.00;oui;validee
+TX-0929;2026-09-28;Immo Centre SCI;Loyer;1450.00;oui;soumise
+TX-0930;2026-09-29;Hôtel du Parc;Deplacement;165.00;oui;validee
