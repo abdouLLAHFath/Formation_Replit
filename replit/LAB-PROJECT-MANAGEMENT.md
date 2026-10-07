@@ -21,7 +21,7 @@
 📋 **Prompt à coller (en Plan)**
 
 ```text
-Atelier Nova organise un mariage de 120 invités dans six semaines.
+Atelier Nova organise un événement de 120 invités dans six semaines.
 Je veux un outil de suivi de projet pour cet événement : tâches,
 responsable, échéance, statut. Pose-moi les questions nécessaires,
 puis propose 3 à 5 user stories avec critères d'acceptation, et un
