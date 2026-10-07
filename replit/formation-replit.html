@@ -1,0 +1,1377 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Replit — Formation complète</title>
+<meta name="description" content="Formation Replit : Replit Agent, neuf éléments fondamentaux, labs RH, Ticketing, Finance, Project Management, mini CRM, débogage et récapitulatif">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* =====================================================================
+   FONDAMENTAUX CLAUDE CODE — deck
+   Identité : « blueprint » — encre bleue profonde, traits crème, ambre
+   pour ce qui compte. Un seul thème (projection), impression en clair.
+   Canevas fixe 1920×1080, mis à l'échelle pour l'écran.
+   ===================================================================== */
+:root{
+  --bg:#0D1B2A;          /* encre bleue profonde */
+  --bg-2:#122436;        /* surface un cran plus claire */
+  --bg-3:#183048;        /* surface accentuée */
+  --line:#2E4A66;        /* traits de structure */
+  --line-2:#4A6A8C;      /* traits secondaires plus visibles */
+  --ink:#F3EDE2;         /* crème : texte principal */
+  --ink-2:#B9C4D2;       /* texte secondaire */
+  --ink-3:#7F90A5;       /* texte discret */
+  --accent:#F2B441;      /* ambre : ce qui compte */
+  --accent-ink:#1A1204;  /* texte sur ambre */
+  --ok:#5FD3A6;          /* preuve, autorisé */
+  --danger:#FF7F66;      /* interdit, piège */
+  --info:#6EC1FF;        /* neutre technique */
+  --blockA:#F2B441; --blockB:#5FD3A6; --blockC:#FF7F66; --blockD:#6EC1FF;
+  --display:"Bricolage Grotesque","Archivo","Segoe UI",system-ui,sans-serif;
+  --body:"IBM Plex Sans","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:"IBM Plex Mono","Cascadia Mono","Consolas","Menlo",monospace;
+  --W:1920px; --H:1080px;
+  --pad-x:120px; --pad-y:88px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;height:100%}
+body{
+  background:var(--bg);color:var(--ink);font-family:var(--body);
+  font-size:30px;line-height:1.35;overflow:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--accent)}
+::selection{background:var(--accent);color:var(--accent-ink)}
+kbd,code,pre,.mono{font-family:var(--mono)}
+code{font-size:.92em;background:var(--bg-3);padding:.08em .38em;border-radius:6px;color:var(--ink)}
+pre code{background:none;padding:0}
+strong{font-weight:600;color:#fff}
+em{font-style:italic}
+h1,h2,h3,h4{font-family:var(--display);font-weight:700;margin:0;text-wrap:balance;line-height:1.08;letter-spacing:-.01em}
+p{margin:0}
+ul,ol{margin:0;padding-left:1.1em}
+li{margin:.28em 0}
+li::marker{color:var(--accent)}
+
+/* --- scène --------------------------------------------------------- */
+#stage{position:absolute;top:0;left:0;width:var(--W);height:var(--H);transform-origin:top left;overflow:hidden}
+.slide{
+  position:absolute;inset:0;width:var(--W);height:var(--H);
+  display:none;flex-direction:column;gap:36px;
+  padding:var(--pad-y) var(--pad-x) 110px var(--pad-x);
+  background:var(--bg);
+}
+.slide.active{display:flex;animation:slideIn .45s ease-out both}
+@keyframes slideIn{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
+.slide > .body{flex:1;min-height:0;display:flex;flex-direction:column;gap:32px}
+.slide > .body.row{flex-direction:row;align-items:stretch}
+.slide > .body.cols{display:grid;gap:36px;align-items:start}
+.slide > .body.cols.stretch{align-items:stretch}
+
+/* en-tête de slide */
+.eyebrow{font-family:var(--mono);font-size:22px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.eyebrow .ref{color:var(--ink-3);margin-left:1em;letter-spacing:.1em}
+h2.title{font-size:64px;font-weight:700}
+h2.title .thin{font-weight:400;color:var(--ink-2)}
+.sub{font-size:32px;color:var(--ink-2);margin-top:14px;max-width:1400px;text-wrap:balance}
+.lead{font-size:34px;max-width:1500px}
+.small{font-size:24px;color:var(--ink-2)}
+.muted{color:var(--ink-2)}
+.dim{color:var(--ink-3)}
+.amber{color:var(--accent)}
+.ok{color:var(--ok)}
+.danger{color:var(--danger)}
+.info{color:var(--info)}
+.nowrap{white-space:nowrap}
+.center{text-align:center}
+.tnum{font-variant-numeric:tabular-nums}
+
+/* grilles */
+.cols{display:grid;gap:36px;align-items:start;min-height:0}
+.cols-2{grid-template-columns:1fr 1fr}
+.cols-3{grid-template-columns:1fr 1fr 1fr}
+.cols-4{grid-template-columns:repeat(4,1fr)}
+.cols-2-1{grid-template-columns:2fr 1fr}
+.cols-1-2{grid-template-columns:1fr 2fr}
+.cols-3-2{grid-template-columns:3fr 2fr}
+.cols-2-3{grid-template-columns:2fr 3fr}
+.stretch{align-items:stretch}
+.stack{display:flex;flex-direction:column;gap:24px}
+.row{display:flex;gap:28px;align-items:center}
+.grow{flex:1;min-width:0}
+.spacer{flex:1}
+
+/* cartes */
+.card{background:var(--bg-2);border:1px solid var(--line);border-radius:18px;padding:34px 38px;min-width:0}
+.card.accent{border-color:var(--accent);box-shadow:inset 6px 0 0 var(--accent)}
+.card.good{border-color:var(--ok);box-shadow:inset 6px 0 0 var(--ok)}
+.card.bad{border-color:var(--danger);box-shadow:inset 6px 0 0 var(--danger)}
+.card.flat{background:transparent}
+.card h3{font-size:34px;margin-bottom:14px}
+.card h3.mono{font-family:var(--mono);font-weight:600;font-size:28px;letter-spacing:.02em}
+.card .k{font-family:var(--mono);font-size:22px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-bottom:10px}
+.card p+p,.card p+ul{margin-top:12px}
+.card.compact{padding:24px 28px}
+.card.compact h3{font-size:30px;margin-bottom:8px}
+
+/* étiquettes et touches */
+.pill{display:inline-block;font-family:var(--mono);font-size:22px;letter-spacing:.06em;padding:6px 16px;border-radius:999px;border:1px solid var(--line-2);color:var(--ink-2);white-space:nowrap}
+.pill.amber{border-color:var(--accent);color:var(--accent)}
+.pill.ok{border-color:var(--ok);color:var(--ok)}
+.pill.danger{border-color:var(--danger);color:var(--danger)}
+.pill.info{border-color:var(--info);color:var(--info)}
+.pill.solid{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:600}
+kbd.key{display:inline-block;font-size:.85em;padding:.1em .55em;border:1px solid var(--line-2);border-bottom-width:3px;border-radius:8px;background:var(--bg-3);color:var(--ink);white-space:nowrap}
+.cmd{font-family:var(--mono);color:var(--accent)}
+
+/* terminal */
+.term{background:#0A1420;border:1px solid var(--line);border-radius:16px;overflow:hidden;min-width:0}
+.term .bar{display:flex;align-items:center;gap:10px;padding:14px 20px;background:var(--bg-2);border-bottom:1px solid var(--line);font-family:var(--mono);font-size:20px;color:var(--ink-3)}
+.term .bar i{width:14px;height:14px;border-radius:50%;background:var(--line-2);display:inline-block}
+.term .bar i:nth-child(1){background:#FF7F66}.term .bar i:nth-child(2){background:#F2B441}.term .bar i:nth-child(3){background:#5FD3A6}
+.term .bar span{margin-left:8px}
+.term pre{margin:0;padding:26px 30px;font-size:25px;line-height:1.42;white-space:pre-wrap;word-break:break-word;color:var(--ink)}
+.term pre.small{font-size:22px}
+.term .p{color:var(--accent)}      /* invite */
+.term .c{color:var(--ink-3)}       /* commentaire */
+.term .o{color:var(--ink-2)}       /* sortie */
+.term .g{color:var(--ok)}
+.term .r{color:var(--danger)}
+.term .b{color:var(--info)}
+
+/* prompt à coller */
+.prompt{background:var(--bg-2);border:1px solid var(--accent);border-radius:16px;overflow:hidden;min-width:0}
+.prompt .bar{font-family:var(--mono);font-size:20px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-ink);background:var(--accent);padding:10px 22px;font-weight:600}
+.prompt pre{margin:0;padding:24px 28px;font-family:var(--body);font-size:26px;line-height:1.4;white-space:pre-wrap;color:var(--ink)}
+.prompt mark{background:transparent;color:var(--accent);font-weight:600}
+
+/* encadrés */
+.callout{border:1px solid var(--line);border-radius:16px;padding:22px 28px 22px 28px;background:var(--bg-2);display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:start;min-width:0}
+.callout .tag{font-family:var(--mono);font-size:20px;letter-spacing:.14em;text-transform:uppercase;padding:6px 12px;border-radius:8px;white-space:nowrap;margin-top:4px}
+.callout.tip{border-color:var(--info)}.callout.tip .tag{background:var(--info);color:#03192B}
+.callout.warn{border-color:var(--danger)}.callout.warn .tag{background:var(--danger);color:#2A0A03}
+.callout.check{border-color:var(--ok)}.callout.check .tag{background:var(--ok);color:#03211A}
+.callout.rule{border-color:var(--accent)}.callout.rule .tag{background:var(--accent);color:var(--accent-ink)}
+.callout p{font-size:27px}
+
+/* tableaux */
+table.tbl{border-collapse:collapse;width:100%;font-size:26px;line-height:1.3}
+table.tbl th{text-align:left;font-family:var(--mono);font-size:20px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);padding:10px 18px;border-bottom:2px solid var(--line-2)}
+table.tbl td{padding:14px 18px;border-bottom:1px solid var(--line);vertical-align:top}
+table.tbl tr:last-child td{border-bottom:none}
+table.tbl td:first-child{color:#fff;font-weight:500}
+table.tbl.tight td{padding:9px 14px;font-size:24px}
+table.tbl .yes{color:var(--ok)}table.tbl .no{color:var(--danger)}
+table.tbl.vs th:nth-child(2){color:var(--danger)}table.tbl.vs th:nth-child(3){color:var(--ok)}
+
+/* listes de gestes / étapes */
+.steps{display:flex;gap:0;align-items:stretch;counter-reset:s}
+.steps .step{flex:1;min-width:0;position:relative;padding:28px 30px 28px 34px;border:1px solid var(--line);background:var(--bg-2);counter-increment:s}
+.steps .step:first-child{border-radius:18px 0 0 18px}
+.steps .step:last-child{border-radius:0 18px 18px 0}
+.steps .step+.step{border-left:none}
+.steps .step::before{content:counter(s);position:absolute;top:-22px;left:26px;font-family:var(--mono);font-weight:600;font-size:22px;background:var(--accent);color:var(--accent-ink);width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.steps .step h3{font-size:30px;margin-bottom:8px}
+.steps .step p{font-size:24px;color:var(--ink-2)}
+.steps .step.hot{border-color:var(--accent);background:var(--bg-3)}
+
+.checklist{list-style:none;padding:0}
+.checklist li{padding-left:1.5em;position:relative}
+.checklist li::before{content:"";position:absolute;left:0;top:.42em;width:.8em;height:.8em;border:2px solid var(--ok);border-radius:5px}
+.checklist li.done::before{background:var(--ok)}
+
+.num-list{list-style:none;padding:0;counter-reset:n}
+.num-list li{counter-increment:n;padding-left:2.2em;position:relative;margin:.5em 0}
+.num-list li::before{content:counter(n);position:absolute;left:0;top:.05em;font-family:var(--mono);font-weight:600;color:var(--accent-ink);background:var(--accent);border-radius:50%;width:1.5em;height:1.5em;font-size:.85em;display:flex;align-items:center;justify-content:center}
+
+/* grandes idées */
+.slide.key{justify-content:center}
+.slide.key .big{font-family:var(--display);font-size:92px;font-weight:800;line-height:1.05;max-width:1600px;text-wrap:balance}
+.slide.key .big em{font-style:normal;color:var(--accent)}
+.slide.key .from{font-family:var(--mono);font-size:24px;color:var(--ink-3);letter-spacing:.1em;text-transform:uppercase;margin-top:30px}
+
+/* KPI */
+.kpi{display:flex;flex-direction:column;gap:6px}
+.kpi .v{font-family:var(--display);font-size:96px;font-weight:800;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
+.kpi .l{font-size:26px;color:var(--ink-2)}
+
+/* --- slide de section ------------------------------------------------ */
+.slide.section{justify-content:center;background:var(--bg-2)}
+.slide.section .letter{font-family:var(--display);font-size:520px;font-weight:800;line-height:.8;color:transparent;-webkit-text-stroke:3px var(--accent);position:absolute;right:120px;bottom:60px;opacity:.55;letter-spacing:-.04em}
+.slide.section .kicker{font-family:var(--mono);font-size:26px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.slide.section h2{font-size:112px;font-weight:800;margin:20px 0 28px;max-width:1300px}
+.slide.section .pages{font-size:30px;color:var(--ink-2);max-width:1200px}
+.slide.section .pages b{color:var(--ink);font-weight:600}
+.slide.section .meta{display:flex;gap:18px;margin-top:40px;flex-wrap:wrap}
+
+/* --- slide de titre --------------------------------------------------- */
+.slide.cover{justify-content:flex-end;padding-bottom:140px;background:
+  radial-gradient(1200px 700px at 78% 30%, rgba(242,180,65,.14), transparent 60%),var(--bg)}
+.slide.cover .kicker{font-family:var(--mono);font-size:26px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+.slide.cover h1{font-size:150px;font-weight:800;line-height:.98;margin:26px 0 30px;max-width:1500px}
+.slide.cover h1 .thin{font-weight:400;color:var(--ink-2)}
+.slide.cover .tag{font-size:36px;color:var(--ink-2);max-width:1300px}
+.slide.cover .grid-bg{position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:96px 96px;opacity:.28;mask-image:radial-gradient(900px 600px at 70% 40%,#000,transparent 75%);-webkit-mask-image:radial-gradient(900px 600px at 70% 40%,#000,transparent 75%)}
+
+/* --- slide LAB -------------------------------------------------------- */
+.slide.lab{background:var(--bg);padding-top:80px}
+.slide.lab .body{display:grid;grid-template-columns:640px 1fr;gap:56px;align-items:stretch}
+.slide.lab .badge{border:3px solid var(--accent);border-radius:28px;padding:40px 44px;display:flex;flex-direction:column;gap:18px;background:linear-gradient(180deg,rgba(242,180,65,.12),transparent 70%),var(--bg-2)}
+.slide.lab .badge .k{font-family:var(--mono);font-size:24px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+.slide.lab .badge .id{font-family:var(--mono);font-size:110px;font-weight:600;line-height:1;color:var(--accent);letter-spacing:-.02em}
+.slide.lab .badge h2{font-size:44px;font-weight:700;margin:6px 0 10px}
+.slide.lab .badge .meta{display:flex;flex-direction:column;gap:12px;margin-top:auto;font-size:26px}
+.slide.lab .badge .meta div{display:flex;gap:16px;align-items:baseline}
+.slide.lab .badge .meta .k2{font-family:var(--mono);font-size:20px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);min-width:120px}
+.slide.lab .badge .meta code{font-size:24px;background:var(--bg-3)}
+.slide.lab .badge .time{font-family:var(--display);font-size:64px;font-weight:800;color:var(--ink);line-height:1}
+.slide.lab .plan{display:flex;flex-direction:column;gap:22px;min-height:0}
+.slide.lab .plan h3{font-family:var(--mono);font-size:21px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:10px}
+.slide.lab .plan .lead{font-size:30px}
+.slide.lab .plan ol{font-size:26px}
+.slide.lab .plan ol li{margin:.3em 0}
+.slide.lab .plan .check{border:1px solid var(--ok);border-radius:16px;padding:18px 26px;background:var(--bg-2)}
+.slide.lab .plan .check h3{color:var(--ok);margin-bottom:8px}
+.slide.lab .plan .check ul{font-size:24px}
+.slide.lab .plan .check ul li{margin:.25em 0}
+.slide.lab .badge .id{font-size:96px}
+.slide.lab .badge h2{font-size:40px}
+
+/* --- figures SVG ------------------------------------------------------ */
+figure.fig{margin:0;min-width:0;display:flex;flex-direction:column;gap:14px}
+figure.fig svg{width:100%;height:auto;max-height:100%;display:block;font-family:var(--body);color:var(--ink)}
+figure.fig figcaption{font-size:24px;color:var(--ink-3)}
+figure.fig svg text{fill:currentColor;font-size:26px}
+figure.fig svg .lbl{font-family:var(--mono);font-size:22px;letter-spacing:.06em;fill:var(--ink-2)}
+figure.fig svg .t{font-size:28px;font-weight:600;fill:#fff}
+figure.fig svg .t2{font-size:24px;fill:var(--ink-2)}
+figure.fig svg .box{fill:var(--bg-2);stroke:var(--line-2);stroke-width:2}
+figure.fig svg .box.hot{stroke:var(--accent);stroke-width:3;fill:var(--bg-3)}
+figure.fig svg .box.ok{stroke:var(--ok)}
+figure.fig svg .box.bad{stroke:var(--danger)}
+figure.fig svg .ln{fill:none;stroke:var(--line-2);stroke-width:3}
+figure.fig svg .ln.hot{stroke:var(--accent)}
+figure.fig svg .ln.ok{stroke:var(--ok)}
+figure.fig svg .ln.bad{stroke:var(--danger)}
+figure.fig svg .ln.dash{stroke-dasharray:10 10}
+.fill-accent{fill:var(--accent)}.fill-ok{fill:var(--ok)}.fill-bad{fill:var(--danger)}.fill-info{fill:var(--info)}.fill-ink{fill:var(--ink)}.fill-bg{fill:var(--bg)}.fill-bg2{fill:var(--bg-2)}
+.stroke-accent{stroke:var(--accent)}.stroke-ok{stroke:var(--ok)}.stroke-bad{stroke:var(--danger)}.stroke-info{stroke:var(--info)}.stroke-line{stroke:var(--line-2)}
+
+/* densité réduite pour les slides chargées */
+.slide.dense{font-size:26px}
+.slide.dense h2.title{font-size:54px}
+.slide.dense .sub{font-size:28px}
+.slide.dense > .body{gap:22px}
+.slide.dense .cols,.slide.dense > .body.cols{gap:24px}
+.slide.dense .stack{gap:16px}
+.slide.dense li{margin:.18em 0}
+.slide.dense .card{padding:22px 26px}
+.slide.dense .card h3{font-size:29px;margin-bottom:8px}
+.slide.dense .card .k{font-size:19px;margin-bottom:6px}
+.slide.dense .card.compact{padding:16px 20px}
+.slide.dense .callout{padding:14px 20px;gap:16px}
+.slide.dense .callout p{font-size:23px}
+.slide.dense .callout .tag{font-size:17px}
+.slide.dense table.tbl{font-size:22px}
+.slide.dense table.tbl td{padding:8px 12px}
+.slide.dense table.tbl th{padding:6px 12px;font-size:17px}
+.slide.dense .term pre,.slide.dense .prompt pre{font-size:21px;padding:16px 20px;line-height:1.35}
+.slide.dense .term .bar,.slide.dense .prompt .bar{padding:8px 16px;font-size:17px}
+.slide.dense .steps .step{padding:20px 22px}
+.slide.dense .steps .step h3{font-size:26px}
+.slide.dense .steps .step p{font-size:21px}
+.slide.dense .lead{font-size:29px}
+.slide.dense .pill{font-size:19px;padding:4px 12px}
+.slide.dense figure.fig figcaption{font-size:21px}
+.slide.dense figure.fig svg{max-height:560px}
+figure.fig svg{max-height:700px}
+
+/* animations (démarrent quand la slide devient active) */
+.slide.active .draw{stroke-dasharray:2000;stroke-dashoffset:2000;animation:draw 1.6s ease-out forwards}
+.slide.active .draw.d1{animation-delay:.3s}.slide.active .draw.d2{animation-delay:.6s}.slide.active .draw.d3{animation-delay:.9s}.slide.active .draw.d4{animation-delay:1.2s}
+@keyframes draw{to{stroke-dashoffset:0}}
+.slide.active .rise{animation:rise .6s ease-out both}
+.slide.active .rise.d1{animation-delay:.15s}.slide.active .rise.d2{animation-delay:.3s}.slide.active .rise.d3{animation-delay:.45s}.slide.active .rise.d4{animation-delay:.6s}.slide.active .rise.d5{animation-delay:.75s}.slide.active .rise.d6{animation-delay:.9s}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.slide.active .pulse{animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.45}}
+.slide.active .flow{stroke-dasharray:14 12;animation:flow 1.4s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-52}}
+.fragment{opacity:0;transform:translateY(10px);transition:opacity .35s ease,transform .35s ease}
+.fragment.visible{opacity:1;transform:none}
+.fragment.dimmable.visible.past{opacity:.35}
+body.static .slide.active,body.static .slide.active .draw,body.static .slide.active .rise,body.static .slide.active .pulse,body.static .slide.active .flow{animation:none!important}
+body.static .slide.active .draw{stroke-dashoffset:0!important}
+body.static .fragment{transition:none}
+@media (prefers-reduced-motion:reduce){
+  .slide.active,.slide.active .draw,.slide.active .rise,.slide.active .pulse,.slide.active .flow{animation:none!important}
+  .slide.active .draw{stroke-dashoffset:0!important}
+  .fragment{transition:none}
+}
+
+/* --- chrome (barre, compteur, aide, notes, sommaire) ------------------ */
+#chrome{position:fixed;left:0;right:0;bottom:0;height:0;pointer-events:none;z-index:10}
+#progress{position:fixed;left:0;bottom:0;height:5px;background:var(--accent);width:0;transition:width .3s ease;z-index:11}
+#footer{position:fixed;left:0;right:0;bottom:12px;display:flex;justify-content:space-between;align-items:center;padding:0 28px;font-family:var(--mono);font-size:14px;color:var(--ink-3);letter-spacing:.08em;text-transform:uppercase;z-index:11;pointer-events:none}
+#footer .blk{display:flex;gap:14px;align-items:center}
+#footer .dot{width:10px;height:10px;border-radius:50%;background:var(--accent);display:inline-block}
+#footer .dot.A{background:var(--blockA)}#footer .dot.B{background:var(--blockB)}#footer .dot.C{background:var(--blockC)}#footer .dot.D{background:var(--blockD)}
+#footer .dot.E{background:var(--ink-3)}
+#footer .num{color:var(--ink-2)}
+#footer .timer{color:var(--ink-3)}
+#help,#toc,#notes{position:fixed;z-index:20;font-family:var(--body);color:var(--ink)}
+#help,#toc{inset:0;background:rgba(13,27,42,.96);display:none;padding:48px 64px;overflow:auto}
+#help.open,#toc.open{display:block}
+#help h3,#toc h3{font-family:var(--display);font-size:34px;margin-bottom:22px}
+#help table{border-collapse:collapse;font-size:20px}
+#help td{padding:8px 18px 8px 0;vertical-align:top}
+#help kbd{border:1px solid var(--line-2);border-bottom-width:3px;border-radius:6px;padding:2px 8px;background:var(--bg-3);font-size:18px}
+#toc .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px 28px;font-size:18px}
+#toc .grid a{color:var(--ink-2);text-decoration:none;display:flex;gap:10px;padding:5px 8px;border-radius:6px;cursor:pointer}
+#toc .grid a:hover,#toc .grid a.cur{background:var(--bg-3);color:#fff}
+#toc .grid a .n{font-family:var(--mono);color:var(--ink-3);min-width:34px;text-align:right}
+#toc .grid a.sec{color:var(--accent);font-weight:600;margin-top:10px}
+#toc .grid a.lab .n{color:var(--accent)}
+#notes{right:0;top:0;bottom:0;width:0;background:#0A1420;border-left:1px solid var(--line);overflow:auto;transition:width .25s ease;padding:0;font-size:17px;line-height:1.5;color:var(--ink-2)}
+#notes.open{width:420px;padding:24px 26px}
+#notes h4{font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 12px}
+#notes .n-title{font-family:var(--display);font-size:20px;color:var(--ink);margin-bottom:14px}
+#notes ul{padding-left:1.1em}
+#notes li{margin:.35em 0}
+#notes .next{margin-top:22px;padding-top:14px;border-top:1px solid var(--line);color:var(--ink-3);font-size:14px}
+aside.notes{display:none}
+body.notes-open #stage{}
+#hint{position:fixed;left:50%;bottom:34px;transform:translateX(-50%);font-family:var(--mono);font-size:14px;color:var(--ink-3);letter-spacing:.1em;text-transform:uppercase;z-index:11;transition:opacity 1s;pointer-events:none}
+#hint.hide{opacity:0}
+
+/* --- v2 : composants ajoutés ------------------------------------------ */
+/* deux couloirs : la même demande dans deux mondes */
+.lanes{display:flex;flex-direction:column;gap:46px;margin-top:18px}
+.lane{display:grid;grid-template-columns:250px minmax(0,1fr);gap:30px;align-items:center}
+.lane-k{font-family:var(--mono);font-size:20px;letter-spacing:.12em;text-transform:uppercase;line-height:1.25}
+.lane-k b{display:block;font-family:var(--display);font-size:32px;font-weight:700;letter-spacing:-.01em;text-transform:none;color:var(--ink);margin-top:8px;line-height:1.1}
+.steps.muted .step{background:transparent;border-style:dashed}
+.steps.muted .step::before{background:var(--line-2);color:var(--ink)}
+.steps.muted .step h3{color:var(--ink-2)}
+.steps .step p code{font-size:.84em}
+/* terminal : la question que Claude Code affiche avant d'agir */
+.term .ask{display:block;margin:10px 0 2px 30px;padding:10px 18px;border:1px solid var(--accent);border-radius:10px;color:var(--ink);background:rgba(242,180,65,.07)}
+.term .ask b{color:var(--accent);font-weight:600}
+/* les trois étiquettes : Dans Claude · Dans le terminal · Exemple à lire */
+.prompt.example{border:1px dashed var(--line-2)}
+.prompt.example .bar{background:var(--bg-3);color:var(--ink-2)}
+.tagdemo{display:inline-block;font-family:var(--mono);font-size:17px;letter-spacing:.12em;text-transform:uppercase;padding:6px 12px;border-radius:8px;font-weight:600;white-space:nowrap}
+.tagdemo.claude{background:var(--accent);color:var(--accent-ink)}
+.tagdemo.terminal{background:var(--bg-2);color:var(--ink-3);border:1px solid var(--line-2)}
+.tagdemo.example{background:var(--bg-3);color:var(--ink-2);border:1px dashed var(--line-2)}
+.legend{display:grid;grid-template-columns:auto 1fr;gap:12px 18px;align-items:center}
+table.tbl th.hot{color:var(--accent)}
+/* code dans un schéma : chasse fixe sans espacement de lettres, pour tenir dans les boîtes */
+figure.fig svg .code{font-family:var(--mono);font-size:21px;fill:var(--ink-2)}
+/* substitution d'un argument de commande */
+.subst{display:flex;flex-direction:column;gap:10px}
+.subst .typed{font-family:var(--mono);font-size:30px;color:var(--accent)}
+.subst .got{font-family:var(--mono);font-size:22px;color:var(--ink-2);line-height:1.5}
+.subst .got b{color:var(--ok);font-weight:600}
+/* les deux questions de clôture */
+.twoq{display:flex;flex-direction:column;gap:30px;justify-content:center}
+.twoq .q{font-family:var(--display);font-size:44px;font-weight:700;line-height:1.12;text-wrap:balance}
+.twoq .q .k{display:block;font-family:var(--mono);font-size:19px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+/* notes structurées dans le panneau N (la fenêtre présentateur a sa propre copie) */
+/* ordre : le texte oral, les gestes, le débrief, la transition, puis la réserve (intention, version développée) */
+#notes .n-oral::before,#notes .n-do::before,#notes .n-debrief::before,#notes .n-next::before,#notes .n-idea::before,#notes .n-say::before{display:block;font-family:var(--mono);font-size:12px;font-weight:400;font-style:normal;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+#notes .n-oral::before{content:"À dire"}
+#notes .n-oral .o-cle{font-family:var(--display);font-size:22px;font-weight:700;line-height:1.2;color:var(--accent);margin:0 0 6px}
+#notes .n-oral .o-rep{font-family:var(--mono);font-size:13px;line-height:1.45;color:var(--ink-3);margin:0 0 10px}
+#notes .n-oral p{margin:.4em 0;color:var(--ink)}
+#notes .n-oral .o-pause{font-style:italic;color:var(--ok)}
+#notes .n-oral .o-pause::before{content:"⏸ "}
+#notes .n-do,#notes .n-debrief,#notes .n-next,#notes .n-idea,#notes .n-say{margin:12px 0 0;padding-top:10px;border-top:1px solid var(--line)}
+#notes .n-do::before{content:"À faire"}
+#notes .n-debrief::before{content:"Débrief"}
+#notes .n-next::before{content:"Transition"}
+#notes .n-next{font-style:italic}
+#notes .n-idea{border-top-style:dashed;font-size:15px;color:var(--ink-2)}
+#notes .n-idea::before,#notes .n-say::before{color:var(--ink-3)}
+#notes .n-idea::before{content:"Intention"}
+#notes .n-say{border-top:0;padding-top:0}
+#notes .n-say::before{content:"Version développée"}
+#notes .n-say p{margin:.45em 0;font-size:15px;color:var(--ink-2)}
+
+/* --- reproductions de l'application Claude (onglet Code, Windows) ------ */
+/* Des captures reconstruites en HTML : le thème clair de l'application, ses libellés
+   français (version 2.110), un compte et des données fictifs. Les pastilles .ui-n
+   renvoient à la légende de la diapositive ; leur position est en pixels dans .ui. */
+.shot-grid,.slide > .body.shot-grid{display:grid;grid-template-columns:1100px minmax(0,1fr);gap:28px;align-items:start}
+.shot-grid.menu,.slide > .body.shot-grid.menu{grid-template-columns:720px minmax(0,1fr)}
+.shot-legend{font-size:25px;line-height:1.28;margin:0}
+.slide.dense .shot-legend li{margin:0 0 .78em}
+.shot-legend li strong{color:var(--ink)}
+.checklist.prereq{font-size:24px;margin-top:10px}
+.slide.dense .checklist.prereq li{margin:0 0 26px;padding-left:1.9em}
+.checklist.prereq li::before{top:.28em;width:1.05em;height:1.05em}
+.checklist.prereq li b{display:block;font-family:var(--display);font-size:32px;font-weight:700;color:var(--ink);line-height:1.15;margin-bottom:3px}
+.checklist.prereq li span{color:var(--ink-2)}
+.row.reglage{gap:12px;margin:6px 0 14px}
+.row.reglage .pill{font-size:24px;padding:8px 18px}
+figure.shot{margin:0;min-width:0;display:flex;flex-direction:column;gap:10px}
+figure.shot figcaption{font-size:19px;color:var(--ink-3);line-height:1.3}
+.ui{
+  --u-bg:#FAF9F5;--u-side:#F5F4EF;--u-card:#EFEDE6;--u-sel:#E8E5DC;--u-line:#E4E1D8;--u-line-2:#CFCBBF;
+  --u-ink:#1F1E1C;--u-ink-2:#5B5A55;--u-ink-3:#8C8A83;--u-clay:#D97757;--u-amber:#B26B00;--u-blue:#2E6BE6;
+  --u-ok:#2F7A4B;--u-bad:#B5412C;
+  position:relative;color:var(--u-ink);
+  font-family:"Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  font-size:19px;line-height:1.3;letter-spacing:0;text-align:left
+}
+.ui *{box-sizing:border-box}
+.ui strong,.ui b{color:inherit;font-weight:600}
+.ui code{background:none;padding:0;border-radius:0;color:inherit;font-size:inherit}
+.ui-i{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;display:block}
+.ui-i.s{width:17px;height:17px}
+.ui-n{position:absolute;z-index:5;width:38px;height:38px;margin:-19px 0 0 -19px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font:600 21px/38px var(--mono);text-align:center;box-shadow:0 0 0 4px var(--bg),0 4px 14px rgba(0,0,0,.35)}
+/* la fenêtre */
+.ui-win{width:1100px;height:690px;border-radius:12px;background:var(--u-bg);box-shadow:0 0 0 1px #050B12,0 28px 60px -24px rgba(0,0,0,.75)}
+.ui-clip{position:absolute;inset:0;border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.ui-title{height:46px;flex:none;display:flex;align-items:center;gap:6px;padding:0 0 0 12px;color:var(--u-ink-2)}
+.ui-title .ui-ico{width:34px;height:32px;display:grid;place-items:center;border-radius:8px}
+.ui-seg{display:flex;gap:2px;margin-left:16px;padding:3px;border-radius:10px;background:var(--u-card)}
+.ui-seg span{width:40px;height:30px;display:grid;place-items:center;border-radius:8px;color:var(--u-ink-3)}
+.ui-seg span.on{background:#fff;color:var(--u-ink);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.ui-winctl{margin-left:auto;display:flex;height:100%}
+.ui-winctl span{width:56px;display:grid;place-items:center;color:var(--u-ink-2)}
+.ui-cols{flex:1;min-height:0;display:flex}
+/* la barre latérale */
+.ui-side{width:290px;flex:none;border-right:1px solid var(--u-line);display:flex;flex-direction:column;padding:6px 10px 10px}
+.ui-row{display:flex;align-items:center;gap:10px;height:38px;padding:0 10px;border-radius:9px;white-space:nowrap;overflow:hidden}
+.ui-row.on{background:var(--u-sel)}
+.ui-row .t{overflow:hidden;text-overflow:ellipsis;min-width:0}
+.ui-row .end{margin-left:auto;display:flex;gap:10px;align-items:center;color:var(--u-ink-2)}
+.ui-row.proj{color:var(--u-ink-2);height:36px}
+.ui-row.sess{padding-left:28px;height:34px;font-size:18px}
+.ui-row.sess.on{color:var(--u-ink)}
+.ui-row.more{color:var(--u-ink-3);font-size:18px}
+.ui-gap{height:14px;flex:none}
+.ui-dot{width:9px;height:9px;border-radius:50%;background:#E0962B;flex:none}
+.ui-acct{margin-top:auto;border-top:1px solid var(--u-line);padding-top:10px}
+.ui-av{width:28px;height:28px;border-radius:50%;background:#D6D2C6;color:var(--u-ink);display:grid;place-items:center;font-size:15px;font-weight:600;flex:none}
+.ui-acct .plan{color:var(--u-ink-3)}
+/* la zone principale */
+.ui-main{flex:1;min-width:0;display:flex;flex-direction:column;padding:26px 44px 14px}
+.ui-hello{display:flex;align-items:center;gap:12px;font-size:30px;letter-spacing:-.01em;margin:16px 0 34px 26px}
+.ui-spark{color:var(--u-clay);font-size:34px;line-height:1}
+.ui-h{font-size:18px;font-weight:600;margin:0 0 10px 26px}
+.ui-card{display:flex;align-items:center;gap:12px;height:54px;padding:0 16px;border-radius:12px;background:var(--u-card);font-size:17.5px;white-space:nowrap;overflow:hidden;margin-left:26px}
+.ui-card .st{color:var(--u-amber);display:flex;align-items:center;gap:8px}
+.ui-card .st .ui-dot{background:#E39A2C}
+.ui-card .dim{color:var(--u-ink-3);overflow:hidden;text-overflow:ellipsis;min-width:0}
+.ui-card .end{margin-left:auto;display:flex;gap:14px;align-items:center;color:var(--u-ink-3)}
+.ui-spacer{flex:1}
+.ui-chips{display:flex;gap:8px;margin-bottom:10px}
+.ui-chip{display:flex;align-items:center;gap:8px;height:36px;padding:0 12px;border:1px solid var(--u-line);border-radius:9px;background:var(--u-bg);color:var(--u-ink);font-size:17.5px;white-space:nowrap}
+.ui-chip .sep{width:1px;align-self:stretch;margin:7px 2px;background:var(--u-line)}
+.ui-chip .off{color:var(--u-ink-2)}
+.ui-box{display:flex;align-items:center;min-height:58px;padding:0 16px 0 18px;border:1px solid var(--u-line-2);border-radius:16px;background:#fff;color:var(--u-ink-3);box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.ui-box .end{margin-left:auto;color:var(--u-ink-3)}
+.ui-bar{display:flex;align-items:center;gap:14px;height:44px;padding:0 6px;color:var(--u-ink-2);font-size:17.5px;white-space:nowrap}
+.ui-bar .end{margin-left:auto;display:flex;gap:18px;align-items:center;color:var(--u-ink)}
+.ui-ring{width:22px;height:22px;border-radius:50%;border:2.5px solid var(--u-line-2);position:relative}
+.ui-ring::after{content:"";position:absolute;inset:-2.5px;border-radius:50%;border:2.5px solid transparent;border-top-color:var(--u-ink-2);transform:rotate(20deg)}
+.ui-hot{outline:3px solid var(--accent);outline-offset:3px;border-radius:9px}
+/* une session au travail */
+.ui-tool{display:flex;align-items:center;gap:10px;height:44px;border-bottom:1px solid var(--u-line);padding:0 8px 0 18px;flex:none}
+.ui-tool .ttl{font-weight:600;display:flex;align-items:center;gap:6px}
+.ui-tool .end{margin-left:auto;display:flex;align-items:center;gap:8px;color:var(--u-ink-2)}
+.ui-diff{display:flex;gap:6px;padding:3px 10px;border:1px solid var(--u-line);border-radius:8px;font:500 16px/1.2 var(--mono)}
+.ui-diff .p{color:var(--u-ok)}.ui-diff .m{color:var(--u-bad)}
+.ui-pane-btn{width:34px;height:30px;display:grid;place-items:center;border-radius:8px}
+.ui-split{flex:1;min-height:0;display:flex}
+.ui-chat{flex:1;min-width:0;display:flex;flex-direction:column;padding:14px 24px 10px 52px}
+.ui-msg-u{align-self:flex-end;max-width:84%;background:var(--u-card);border-radius:14px;padding:9px 14px;font-size:17.5px}
+.ui-msg-c{margin:12px 0 6px;font-size:17.5px}
+.ui-step{display:flex;align-items:center;gap:8px;color:var(--u-ink-2);font-size:17px;height:30px}
+.ui-step .f{font-family:var(--mono);font-size:15.5px;color:var(--u-ink)}
+.ui-perm{margin-top:10px;border:1px solid var(--u-line-2);border-radius:12px;background:#fff;box-shadow:0 8px 22px -12px rgba(0,0,0,.25);padding:12px 14px}
+.ui-perm .q{display:flex;align-items:center;gap:8px;color:var(--u-ink-2);font-size:17px}
+.ui-perm pre{margin:8px 0 10px 28px;padding:8px 10px;border-radius:8px;background:var(--u-side);font:15.5px/1.35 var(--mono);color:var(--u-ink);white-space:pre-wrap}
+.ui-btns{display:flex;gap:8px;margin-left:28px;align-items:center}
+.ui-btn{display:flex;align-items:center;gap:8px;height:34px;padding:0 12px;border-radius:9px;border:1px solid var(--u-line-2);background:#fff;font-size:16.5px;white-space:nowrap}
+.ui-btn.pri{background:#1F1E1C;border-color:#1F1E1C;color:#fff}
+.ui-btn kbd{font:13px var(--mono);opacity:.7}
+.ui-term{width:350px;flex:none;border-left:1px solid var(--u-line);display:flex;flex-direction:column;background:#fff}
+.ui-term-h{display:flex;align-items:center;gap:8px;height:40px;padding:0 12px;border-bottom:1px solid var(--u-line);font-size:16.5px;color:var(--u-ink-2)}
+.ui-term-h .end{margin-left:auto;display:flex;gap:10px}
+.ui-term pre{margin:0;padding:10px 12px;font:15px/1.45 var(--mono);color:var(--u-ink);white-space:pre-wrap}
+.ui-term pre .c{color:var(--u-ink-3)}
+/* le détail de l'anneau d'usage (fenêtre de contexte et limites du forfait) */
+.ui-pop{width:640px;border-radius:14px;background:#fff;box-shadow:0 0 0 1px #050B12,0 26px 54px -22px rgba(0,0,0,.65);padding:18px 20px}
+.pop-h{display:flex;align-items:center;gap:10px;color:var(--u-ink-2);font-size:19.5px;margin-bottom:12px}
+.pop-h .end{margin-left:auto;color:var(--u-ink);font-variant-numeric:tabular-nums}
+.pop-bar{display:flex;height:9px;border-radius:5px;overflow:hidden;background:var(--u-card);margin-bottom:14px}
+.pop-bar i{display:block}
+.pop-row{display:flex;align-items:center;gap:12px;height:31px;font-size:18.5px}
+.pop-row .dot{width:13px;height:13px;border-radius:3px;flex:none}
+.pop-row .tok{margin-left:auto;color:var(--u-ink-3);font-variant-numeric:tabular-nums}
+.pop-row .pct{width:72px;text-align:right;color:var(--u-ink-3);font-variant-numeric:tabular-nums}
+.pop-row.off{color:var(--u-ink-3)}
+.pop-sep{height:1px;background:var(--u-line);margin:14px 0 12px}
+.pop-t{font-size:17.5px;color:var(--u-ink-2);margin-bottom:10px}
+.pop-lim{margin-bottom:12px}
+.pop-lim .l{display:flex;gap:12px;font-size:17.5px;color:var(--u-ink-3)}
+.pop-lim .l b{color:var(--u-ink);font-weight:600}
+.pop-lim .l .end{margin-left:auto}
+.pop-lim .g{height:7px;border-radius:4px;background:var(--u-card);margin-top:7px}
+.pop-lim .g i{display:block;height:100%;border-radius:4px;background:#2E6BE6}
+
+/* un menu ouvert (mode, modèle, effort) */
+.ui-stage{width:720px;height:560px;border-radius:12px;background:var(--u-bg);box-shadow:0 0 0 1px #050B12,0 28px 60px -24px rgba(0,0,0,.75);overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:0 28px 12px}
+.ui-menu{position:absolute;z-index:2;background:#fff;border:1px solid var(--u-line);border-radius:14px;box-shadow:0 18px 44px -14px rgba(0,0,0,.3);padding:8px}
+.ui-menu .hd{font-size:16.5px;color:var(--u-ink-3);padding:6px 12px 8px}
+.ui-item{display:grid;grid-template-columns:1fr auto;align-items:center;column-gap:12px;padding:8px 12px;border-radius:9px}
+.ui-item.on{background:var(--u-side)}
+.ui-item .l{display:flex;align-items:center;gap:10px;font-size:19px}
+.ui-item .d{grid-column:1;font-size:16px;color:var(--u-ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ui-item .r{grid-column:2;grid-row:1 / span 2;display:flex;align-items:center;gap:10px;color:var(--u-ink-3);font-size:17px}
+.ui-item .ck{color:var(--u-blue);font-weight:700}
+.ui-item.dash{border-top:1px dashed var(--u-line-2);border-radius:0 0 9px 9px;margin-top:4px}
+.ui-badge{font-size:14.5px;padding:2px 8px;border-radius:6px;background:var(--u-card);color:var(--u-ink-2);white-space:nowrap}
+.ui-badge.warn{background:#FBEBD9;color:#8A4B00}
+.ui-note{font-size:15.5px;color:var(--u-amber);padding:4px 12px 6px;white-space:normal}
+.slide.dense table.tbl.roomy{font-size:24px}
+.slide.dense table.tbl.roomy td{padding:12px 14px}
+table.tbl.roomy td:first-child{white-space:nowrap}
+
+/* --- impression (support papier / PDF, thème clair) ------------------- */
+@media print{
+  :root{--bg:#FFFFFF;--bg-2:#F4F1EA;--bg-3:#E9E4D8;--line:#C9C2B4;--line-2:#9A9284;--ink:#14202B;--ink-2:#3D4A58;--ink-3:#6B7684;--accent:#B8791A;--accent-ink:#fff;--ok:#1E8A63;--danger:#C4432A;--info:#1F6FB2}
+  @page{size:1920px 1080px;margin:0}
+  html,body{overflow:visible;height:auto;background:#fff}
+  #stage{position:static;transform:none!important;width:auto;height:auto}
+  .slide{display:flex!important;position:relative;page-break-after:always;break-after:page;animation:none!important}
+  .fragment{opacity:1!important;transform:none!important}
+  .slide.active .draw{animation:none!important;stroke-dashoffset:0!important}
+  .term{background:#1B2733}.term pre{color:#F3EDE2}.term .o{color:#B9C4D2}
+  strong{color:#000}
+  table.tbl td:first-child{color:var(--ink)}
+  figure.fig svg .t{fill:var(--ink)}
+  .rise,.draw,.flow,.pulse{animation:none!important;opacity:1!important;transform:none!important;stroke-dashoffset:0!important}
+  .slide.section .letter{opacity:.35}
+  #chrome,#progress,#footer,#help,#toc,#notes,#hint{display:none!important}
+}
+</style>
+</head>
+<body>
+
+<div id="stage">
+<section class="slide cover" data-block="A" data-title="Replit — formation">
+  <div class="grid-bg"></div>
+  <div class="kicker">Formation · Replit · De l'idée à l'application IA métier</div>
+  <h1>Construire avec<br><span class="thin">Replit</span></h1>
+  <p class="tag">Un Agent qui écrit le code, configure la base de données et publie l'application. Pendant la journée : un lab par fil, découpé en étapes courtes.</p>
+  <div class="row" style="margin-top:34px;gap:16px;flex-wrap:wrap"><span class="pill amber">Replit Agent</span><span class="pill">RH · Ticketing · Finance · Projet · Mini CRM</span><span class="pill">Débogage et récapitulatif</span></div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Un Agent qui agit vraiment. Aujourd'hui : un lab par fil, en étapes courtes.</p></div><p class="n-next">« Voici le programme de la journée. »</p></aside>
+</section>
+
+<section class="slide dense" data-block="A" data-ref="PROGRAMME" data-title="Du socle au récapitulatif">
+  <div>
+    <div class="eyebrow">Programme</div>
+    <h2 class="title">Du socle au récapitulatif</h2>
+  </div>
+  <div class="body"><table class="tbl tight roomy"><tr><th>Bloc</th><th>Durée</th><th>Lab</th></tr><tr><td>Ouverture</td><td>30 min</td><td>Théorie</td></tr><tr><td>1 · Replit Agent et socle</td><td>1 h 30</td><td>Lab Socle, 3 étapes</td></tr><tr><td>2 · Lab RH</td><td>2 h 40</td><td>Lab RH, 9 étapes</td></tr><tr><td>3 · Lab Ticketing</td><td>1 h 45</td><td>Lab Ticketing, 6 étapes</td></tr><tr><td>4 · Lab Finance</td><td>2 h</td><td>Lab Finance, 6 étapes</td></tr><tr><td>5 · Lecture du code et bibliothèques</td><td>1 h</td><td>Lab Code, 4 étapes</td></tr><tr><td>6 · Lab Project Management</td><td>1 h 15</td><td>Lab Projet, 4 étapes</td></tr><tr><td>7 · Import et assets</td><td>20 min</td><td>Théorie, sans lab</td></tr><tr><td>8 · Lab mini site et mini CRM</td><td>2 h 55</td><td>Lab CRM, 9 étapes</td></tr><tr><td>9 · Débogage</td><td>1 h 30</td><td>Théorie et lab, 5 cas</td></tr><tr><td>10 · Routines, sécurité, déploiement</td><td>50 min</td><td>Lab Mise en ligne, 3 étapes</td></tr><tr><td>11 · Récapitulatif</td><td>1 h 30</td><td>Théorie</td></tr></table></div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Douze blocs, un lab par fil. Chaque étape dure vingt minutes au maximum.</p></div><p class="n-next">« Commençons par la méthode. »</p></aside>
+</section>
+
+<section class="slide dense" data-block="A" data-ref="METHODE" data-title="Sept gestes, dans cet ordre">
+  <div>
+    <div class="eyebrow">Méthode</div>
+    <h2 class="title">Sept gestes, dans cet ordre</h2>
+  </div>
+  <div class="body"><div class="steps" style="margin-top:24px"><div class="step"><h3>Comprendre</h3><p>le besoin</p></div><div class="step"><h3>Construire</h3><p>par petites étapes</p></div><div class="step"><h3>Tester</h3><p>cas normaux et cas piégés</p></div><div class="step"><h3>Corriger</h3><p>une correction ciblée</p></div><div class="step"><h3>Sécuriser</h3><p>données, secrets, accès</p></div><div class="step"><h3>Déployer</h3><p>une URL publique</p></div><div class="step"><h3>Documenter</h3><p>ce qui a été fait, ses limites</p></div></div></div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Sept gestes : on ne saute aucune étape.</p></div><p class="n-next">« Commençons par l'Agent et le socle. »</p></aside>
+</section>
+
+<section class="slide section" data-block="A" data-title="Replit Agent et socle">
+  <div class="letter">1</div>
+  <div class="kicker">Bloc 1</div>
+  <h2>Replit Agent et socle</h2>
+  <p class="pages">Savoir ce qu'est Replit, ce que fait l'Agent, écrire un bon prompt, choisir entre Plan et Build.</p>
+  <div class="meta"><span class="pill amber">Théorie 35 min</span><span class="pill amber">Lab 55 min</span></div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Comprendre l'outil et son Agent avant de le faire travailler.</p></div><p class="n-next">« Qu'est-ce que Replit exactement ? »</p></aside>
+</section>
+
+<section class="slide dense" data-block="A" data-ref="AGENT" data-title="Une plateforme, un Agent">
+  <div>
+    <div class="eyebrow">Replit · Socle</div>
+    <h2 class="title">Une plateforme, un Agent</h2>
+  </div>
+  <div class="body"><div class="cols cols-3 stretch">
+    <div class="card"><div class="k">Replit</div><h3>Dans le navigateur</h3><p>Éditeur de code, exécution, base de données et publication au même endroit. Aucune installation.</p></div>
+    <div class="card accent"><div class="k">Replit Agent</div><h3>Il construit à partir d'une consigne</h3><p>Il lit le projet, écrit le code, installe les dépendances, configure la base et corrige les erreurs.</p></div>
+    <div class="card bad"><div class="k">Limite</div><h3>Il peut dépasser sa consigne</h3><p>En juillet 2025, un Agent a supprimé une base de données pendant un gel du code. D'où les tests, les sauvegardes et la validation humaine.</p></div>
+  </div></div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Replit regroupe tout, et l'Agent agit vraiment.</p></div><p class="n-next">« Et un bon prompt, ça s'écrit comment ? »</p></aside>
+</section>
+
+<section class="slide dense" data-block="A" data-ref="PROMPT" data-title="Anatomie d'un bon prompt">
+  <div>
+    <div class="eyebrow">Socle</div>
+    <h2 class="title">Anatomie d'un bon prompt</h2>
+  </div>
+  <div class="body"><div class="steps" style="margin-top:24px"><div class="step"><h3>Contexte</h3><p>Je gère Atelier Nova, une agence d'événementiel de 12 personnes.</p></div><div class="step"><h3>Objectif</h3><p>Une page qui présente nos trois services.</p></div><div class="step"><h3>Contraintes</h3><p>Garder la palette, aucune donnée réelle, texte en français.</p></div><div class="step"><h3>Format</h3><p>Un titre, trois blocs et un bouton de contact.</p></div></div></div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Quatre ingrédients : contexte, objectif, contraintes, format.</p></div><p class="n-next">« Et la différence entre Plan et Build. »</p></aside>
+</section>
+
+<section class="slide dense" data-block="A" data-ref="PLANBUILD" data-title="Plan ou Build ?">
+  <div>
+    <div class="eyebrow">EF1 · EF5</div>
+    <h2 class="title">Plan ou Build ?</h2>
+  </div>
+  <div class="body"><table class="tbl tight roomy"><tr><th></th><th>Mode Plan</th><th>Mode Build</th></tr><tr><td>Ce que fait l'Agent</td><td>Explore, pose des questions, découpe</td><td>Écrit le code, installe, corrige</td></tr><tr><td>Fichiers</td><td>Aucun n'est modifié</td><td>Modifiés</td></tr><tr><td>Point de retour</td><td>Aucun</td><td>Un par tâche terminée</td></tr><tr><td>Quand l'utiliser</td><td>Cahier des charges, lecture du code</td><td>Construire, corriger</td></tr></table>
+  <div class="callout rule" style="margin-top:24px"><span class="tag">Règle</span><p>On planifie en Plan, on construit en Build, et on revient en arrière dès qu'une modification aggrave les choses.</p></div></div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Le mode Plan ne touche à rien : c'est notre outil de réflexion.</p></div><p class="n-next">« Dernier point du socle : les offres. »</p></aside>
+</section>
+
+<section class="slide dense" data-block="A" data-ref="OFFRES" data-title="Crédits, offres et règles">
+  <div>
+    <div class="eyebrow">Socle</div>
+    <h2 class="title">Crédits, offres et règles</h2>
+  </div>
+  <div class="body"><table class="tbl tight roomy"><tr><th>Offre</th><th>Indicatif</th><th>Pour cette formation</th></tr><tr><td>Starter</td><td>Gratuite</td><td>Routines indisponibles</td></tr><tr><td>Core</td><td>~20 $/mois</td><td>Routines : 5 actives par utilisateur</td></tr><tr><td>Pro</td><td>~100 $/mois</td><td>Routines : 10 actives par utilisateur</td></tr></table>
+  <div class="callout warn" style="margin-top:22px"><span class="tag">Jamais</span><p>Aucune donnée réelle sensible dans un compte de formation. On travaille par étapes courtes pour ne pas gaspiller les crédits.</p></div>
+  <p class="dim" style="margin-top:12px">Tarifs indicatifs, à revérifier avant la séance.</p></div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Données fictives, crédits budgétés, étapes courtes.</p></div><p class="n-next">« Au lab : premier compte et premier résultat. »</p></aside>
+</section>
+
+<section class="slide lab" data-block="A" data-ref="LAB-SOCLE" data-title="Lab Premier compte, premier résultat">
+  <div class="body">
+    <div class="badge">
+      <div class="k">À vous · Lab SOCLE</div>
+      <div class="id">SOCLE</div>
+      <h2>Premier compte, premier résultat</h2>
+      <div class="meta">
+        <div><span class="k2">Notion</span><span>Socle, Agent, EF1, EF5</span></div>
+        <div><span class="k2">Durée</span><span class="time">55 min</span></div>
+      </div>
+    </div>
+    <div class="plan">
+      <div><h3>Objectif</h3><p class="lead">Créer un compte en connaissance des crédits, comparer un prompt vague et un prompt structuré, puis essayer Plan et Build.</p></div>
+      <div><h3>Étapes</h3><ol class="num-list" style="counter-reset:n 0"><li>Créer son compte Replit et choisir une offre</li><li>Nouveau projet, artifact <code>Web app</code>, un prompt simple</li><li>Aperçu (Preview), puis publication (Deployments)</li><li>Envoyer « Fais-moi un site », noter trois choix faits à votre place</li><li>Reprendre avec les quatre ingrédients et comparer</li><li>Mode Plan : obtenir un plan sans modifier un fichier</li><li>Passer en Build, exécuter une seule tâche, revenir à un point de retour</li></ol></div>
+      <div class="check"><h3>Point de contrôle</h3><ul class="checklist"><li>URL publique obtenue</li><li>Deux résultats comparés</li><li>Plan lu sans modification</li><li>Aucune donnée réelle saisie</li></ul></div>
+    </div>
+  </div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Lab SOCLE : Premier compte, premier résultat, 55 min.</p></div></aside>
+</section>
+
+<section class="slide section" data-block="B" data-title="Lab RH · tri et score de CV">
+  <div class="letter">2</div>
+  <div class="kicker">Bloc 2 · Fil rouge RH</div>
+  <h2>Lab RH · tri et score de CV</h2>
+  <p class="pages">Un outil qui aide le recruteur : extraire, scorer, préparer les entretiens. L'humain décide.</p>
+  <div class="meta"><span class="pill amber">Lab unique · 9 étapes · 2 h 40</span></div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Un recrutement, de l'offre à la décision.</p></div><p class="n-next">« Comment fonctionne le recrutement dans l'application ? »</p></aside>
+</section>
+
+<section class="slide dense" data-block="B" data-ref="RH" data-title="Du poste à la décision">
+  <div>
+    <div class="eyebrow">EF1 · Recrutement</div>
+    <h2 class="title">Du poste à la décision</h2>
+  </div>
+  <div class="body"><div class="steps" style="margin-top:24px"><div class="step"><h3>Offre</h3><p>Titre, description, compétences, lieu</p></div><div class="step"><h3>CV</h3><p>PDF ou DOCX, 100 fichiers, 10 Mo max</p></div><div class="step"><h3>Analyse</h3><p>L'IA extrait et score</p></div><div class="step"><h3>Revue</h3><p>Profil, CV original, corrections</p></div><div class="step"><h3>Entretien</h3><p>5 à 8 questions en français</p></div><div class="step"><h3>Décision</h3><p>Retenir, écarter, à revoir : humain</p></div><div class="step"><h3>Échec</h3><p>Réanalyser, ou CV lisible</p></div></div></div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Sept étapes, une décision humaine au milieu.</p></div><p class="n-next">« Que produit exactement l'IA ? »</p></aside>
+</section>
+
+<section class="slide dense" data-block="B" data-ref="RHIA" data-title="L'IA propose, l'humain décide">
+  <div>
+    <div class="eyebrow">EF5 · Analyse</div>
+    <h2 class="title">L'IA propose, l'humain décide</h2>
+  </div>
+  <div class="body"><table class="tbl tight roomy"><tr><th>Information</th><th>Ce que l'IA produit</th></tr><tr><td>Identité et contact</td><td>Nom, téléphone, ville</td></tr><tr><td>Formation</td><td>Diplôme et école</td></tr><tr><td>Expérience</td><td>Résumé et années estimées</td></tr><tr><td>Français</td><td>Preuves présentes dans le CV</td></tr><tr><td>Adéquation</td><td>Score de 0 à 100 et explication</td></tr><tr><td>Entretien</td><td>5 à 8 questions en français</td></tr></table>
+  <div class="callout rule" style="margin-top:22px"><span class="tag">Règle</span><p>Une information absente reste <strong>inconnue</strong>, jamais inventée. Le score n'est pas une décision.</p></div></div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Le score est une aide, pas un verdict.</p></div><p class="n-next">« Au lab : les étapes 1 à 5. »</p></aside>
+</section>
+
+<section class="slide lab" data-block="B" data-ref="LAB-RH" data-title="Lab Lab RH · étapes 1 à 5">
+  <div class="body">
+    <div class="badge">
+      <div class="k">À vous · Lab RH</div>
+      <div class="id">RH</div>
+      <h2>Lab RH · étapes 1 à 5</h2>
+      <div class="meta">
+        <div><span class="k2">Notion</span><span>EF1 · EF4 · EF5</span></div>
+        <div><span class="k2">Durée</span><span class="time">1 h 30</span></div>
+      </div>
+    </div>
+    <div class="plan">
+      <div><h3>Objectif</h3><p class="lead">Cadrer le poste, sécuriser la clé DeepSeek, puis construire le tableau et le score.</p></div>
+      <div><h3>Étapes</h3><ol class="num-list" style="counter-reset:n 0"><li>Créer le projet <code>rh-tri-cv</code>, mode Plan : cahier des charges v0 (3 à 5 user stories, hors périmètre)</li><li>Plan de développement en étapes testables</li><li>Clé DeepSeek dans Secrets, appel de test, clé absente du code</li><li>Build : fiche de poste et tableau des candidatures</li><li>Score de 0 à 100 avec son explication</li></ol></div>
+      <div class="check"><h3>Point de contrôle</h3><ul class="checklist"><li>Cahier des charges v0 écrit</li><li>Clé testée, absente du code</li><li>Tableau des candidatures affiché</li></ul></div>
+    </div>
+  </div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Lab RH : Lab RH · étapes 1 à 5, 1 h 30.</p></div><p class="n-next">« Suite du lab : décision, entretien et cas piégés. »</p></aside>
+</section>
+
+<section class="slide lab" data-block="B" data-ref="LAB-RH" data-title="Lab Lab RH · étapes 6 à 9">
+  <div class="body">
+    <div class="badge">
+      <div class="k">À vous · Lab RH</div>
+      <div class="id">RH</div>
+      <h2>Lab RH · étapes 6 à 9</h2>
+      <div class="meta">
+        <div><span class="k2">Notion</span><span>EF5 · Débogage · Sécurité</span></div>
+        <div><span class="k2">Durée</span><span class="time">1 h 10</span></div>
+      </div>
+    </div>
+    <div class="plan">
+      <div><h3>Objectif</h3><p class="lead">Préparer les entretiens, ajouter la décision humaine, corriger les cas piégés et vérifier les biais.</p></div>
+      <div><h3>Étapes</h3><ol class="num-list" style="counter-reset:n 5"><li>Questions d'entretien : 5 à 8, fondées sur le CV</li><li>Décision humaine : Retenir, Écarter, À revoir, avec commentaire et date</li><li>Cas piégés : CV hors sujet, incomplet, quasi identique</li><li>Biais et RGPD : tester l'âge, le genre, l'origine ; lister les données</li></ol></div>
+      <div class="check"><h3>Point de contrôle</h3><ul class="checklist"><li>Décision distincte du score</li><li>Trois cas piégés corrigés</li><li>Biais testé</li></ul></div>
+    </div>
+  </div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Lab RH : Lab RH · étapes 6 à 9, 1 h 10.</p></div></aside>
+</section>
+
+<section class="slide section" data-block="B" data-title="Lab Ticketing · suivi des demandes">
+  <div class="letter">3</div>
+  <div class="kicker">Bloc 3 · Ticketing</div>
+  <h2>Lab Ticketing · suivi des demandes</h2>
+  <p class="pages">Un outil de support partagé : enregistrer, assigner, suivre, clôturer. En trois parties.</p>
+  <div class="meta"><span class="pill amber">Lab unique · 6 étapes · 1 h 45</span></div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Un workflow clair, un humain qui assigne.</p></div><p class="n-next">« Comment une demande devient un ticket ? »</p></aside>
+</section>
+
+<section class="slide dense" data-block="B" data-ref="TICKET" data-title="Une demande, de l'entrée à la clôture">
+  <div>
+    <div class="eyebrow">Ticketing</div>
+    <h2 class="title">Une demande, de l'entrée à la clôture</h2>
+  </div>
+  <div class="body"><div class="steps" style="margin-top:24px"><div class="step"><h3>Demande</h3><p>Formulaire public ou ticket interne</p></div><div class="step"><h3>Créé</h3><p>Statut Open, non assigné</p></div><div class="step"><h3>Assigné</h3><p>Commercial actif de la même entreprise</p></div><div class="step"><h3>En cours</h3><p>Statut In progress</p></div><div class="step"><h3>Clôturé</h3><p>Statut Closed, le ticket reste</p></div></div></div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Un ticket se suit de l'entrée à la clôture.</p></div><p class="n-next">« Et ce que le module ne fait pas. »</p></aside>
+</section>
+
+<section class="slide dense" data-block="B" data-ref="TICKETLIMITES" data-title="Ce qu'il fait, ce qu'il ne fait pas">
+  <div>
+    <div class="eyebrow">Ticketing</div>
+    <h2 class="title">Ce qu'il fait, ce qu'il ne fait pas</h2>
+  </div>
+  <div class="body"><div class="cols cols-2 stretch">
+    <div class="card good"><div class="k">Le module fait</div><ul><li>Formulaire public, sans connexion</li><li>Assignation manuelle</li><li>Statuts et priorités</li><li>Recherche et filtres</li></ul></div>
+    <div class="card bad"><div class="k">Le module ne fait pas</div><ul><li>Assignation automatique</li><li>E-mails de notification</li><li>Fil de réponses</li><li>Pièces jointes, échéances, escalade</li></ul></div>
+  </div></div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Tout ce qui n'est pas automatisé reste à la charge de l'équipe.</p></div><p class="n-next">« Au lab : du formulaire public à la liaison. »</p></aside>
+</section>
+
+<section class="slide lab" data-block="B" data-ref="LAB-TICKET" data-title="Lab Lab Ticketing · 6 étapes">
+  <div class="body">
+    <div class="badge">
+      <div class="k">À vous · Lab TICKET</div>
+      <div class="id">TICKET</div>
+      <h2>Lab Ticketing · 6 étapes</h2>
+      <div class="meta">
+        <div><span class="k2">Notion</span><span>EF5 · EF8 · Débogage</span></div>
+        <div><span class="k2">Durée</span><span class="time">1 h 45</span></div>
+      </div>
+    </div>
+    <div class="plan">
+      <div><h3>Objectif</h3><p class="lead">Créer un formulaire public qui alimente les tickets, puis assigner, filtrer et corriger une erreur.</p></div>
+      <div><h3>Étapes</h3><ol class="num-list" style="counter-reset:n 0"><li>Formulaire public : sujet, description, nom, e-mail, priorité ; copier le lien ; soumettre sans être connecté</li><li>Ticket interne : Tickets › New ticket, source Interne</li><li>Assigner à un commercial actif, passer en In progress puis Closed, Save changes</li><li>Recherche par sujet, nom, e-mail ; filtres de statut et de priorité</li><li>Liaison : envoyer un formulaire test et retrouver le ticket (à confirmer)</li><li>Ticket mal assigné : diagnostiquer en Plan, corriger en Build</li></ol></div>
+      <div class="check"><h3>Point de contrôle</h3><ul class="checklist"><li>Ticket en Open, non assigné, source formulaire</li><li>Statut et assignation enregistrés</li><li>Liaison vérifiée</li><li>Erreur corrigée</li></ul></div>
+    </div>
+  </div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Lab TICKET : Lab Ticketing · 6 étapes, 1 h 45.</p></div></aside>
+</section>
+
+<section class="slide section" data-block="B" data-title="Lab Finance · clôture comptable">
+  <div class="letter">4</div>
+  <div class="kicker">Bloc 4 · Fil rouge Finance</div>
+  <h2>Lab Finance · clôture comptable</h2>
+  <p class="pages">Des transactions fictives vers une fiche comptable, un tableau de bord et un rapport.</p>
+  <div class="meta"><span class="pill amber">Lab unique · 6 étapes · 2 h</span></div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Le code calcule, l'IA classe et rédige, un humain valide.</p></div><p class="n-next">« Comment se déroule une clôture ? »</p></aside>
+</section>
+
+<section class="slide dense" data-block="B" data-ref="FIN" data-title="De la transaction au rapport">
+  <div>
+    <div class="eyebrow">Finance</div>
+    <h2 class="title">De la transaction au rapport</h2>
+  </div>
+  <div class="body"><div class="steps" style="margin-top:24px"><div class="step"><h3>Nettoyage</h3><p>Doublons, valeurs manquantes</p></div><div class="step"><h3>Classement</h3><p>Un compte par transaction</p></div><div class="step"><h3>Anomalies</h3><p>Cas piégés détectés</p></div><div class="step"><h3>Fiche</h3><p>Par compte et par mois</p></div><div class="step"><h3>Tableau</h3><p>Indicateurs clés</p></div><div class="step"><h3>Rapport</h3><p>Excel ou PDF</p></div></div>
+  <div class="cols cols-3 stretch" style="margin-top:26px">
+    <div class="card good"><div class="k">Le code</div><p>Calcule les totaux et les contrôles.</p></div>
+    <div class="card accent"><div class="k">L'IA</div><p>Classe les lignes et rédige les commentaires.</p></div>
+    <div class="card bad"><div class="k">L'humain</div><p>Relit les anomalies et valide la clôture.</p></div>
+  </div></div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Aucun chiffre ne sort sans contrôle humain.</p></div><p class="n-next">« Au lab : nettoyer et classer les transactions. »</p></aside>
+</section>
+
+<section class="slide lab" data-block="B" data-ref="LAB-FIN" data-title="Lab Lab Finance · 6 étapes">
+  <div class="body">
+    <div class="badge">
+      <div class="k">À vous · Lab FIN</div>
+      <div class="id">FIN</div>
+      <h2>Lab Finance · 6 étapes</h2>
+      <div class="meta">
+        <div><span class="k2">Notion</span><span>EF5 · Build</span></div>
+        <div><span class="k2">Durée</span><span class="time">2 h</span></div>
+      </div>
+    </div>
+    <div class="plan">
+      <div><h3>Objectif</h3><p class="lead">Construire la clôture de bout en bout, des transactions au rapport, en vérifiant chaque chiffre.</p></div>
+      <div><h3>Étapes</h3><ol class="num-list" style="counter-reset:n 0"><li>Nettoyage : supprimer le doublon, signaler le montant aberrant, vérifier le total</li><li>Classement : un compte par transaction, cinq vérifications à la main</li><li>Anomalies : lister et tester sur des cas faux</li><li>Fiche comptable par compte et par mois, totaux vérifiés</li><li>Tableau de bord : total, anomalies, répartition par compte</li><li>Rapport Excel ou PDF, trois chiffres vérifiés, rien envoyé</li></ol></div>
+      <div class="check"><h3>Point de contrôle</h3><ul class="checklist"><li>Doublon supprimé</li><li>Totaux de la fiche justes</li><li>Tableau cohérent avec la fiche</li><li>Rapport ouvert et vérifié</li></ul></div>
+    </div>
+  </div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Lab FIN : Lab Finance · 6 étapes, 2 h.</p></div></aside>
+</section>
+
+<section class="slide section" data-block="C" data-title="Lecture du code et bibliothèques">
+  <div class="letter">5</div>
+  <div class="kicker">Bloc 5 · Code et bibliothèques</div>
+  <h2>Lecture du code et bibliothèques</h2>
+  <p class="pages">Comprendre ce qui a été généré, puis justifier chaque dépendance installée.</p>
+  <div class="meta"><span class="pill amber">Lab unique · 4 étapes · 1 h</span></div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Lire, vérifier, justifier.</p></div><p class="n-next">« Commençons par lire le code. »</p></aside>
+</section>
+
+<section class="slide dense" data-block="C" data-ref="CODE" data-title="Lire son code sans le connaître">
+  <div>
+    <div class="eyebrow">EF6 · Lecture</div>
+    <h2 class="title">Lire son code sans le connaître</h2>
+  </div>
+  <div class="body"><div class="cols cols-3 stretch">
+    <div class="card"><div class="k">Expliquer</div><h3>Une phrase par fichier</h3><p>En mode Plan, sans rien modifier, en langage simple.</p></div>
+    <div class="card accent"><div class="k">Vérifier</div><h3>En modifiant</h3><p>Changer une valeur et constater le résultat annoncé.</p></div>
+    <div class="card bad"><div class="k">Risquer</div><h3>Repérer les risques</h3><p>Ce qui pourrait casser ou donner un résultat faux.</p></div>
+  </div>
+  <div class="callout rule" style="margin-top:24px"><span class="tag">Règle</span><p>Une bibliothèque se justifie en une phrase, sinon on la retire. Exemple : export Excel pour le rapport de la finance.</p></div></div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Une explication se vérifie en la testant.</p></div><p class="n-next">« Au lab : expliquer, vérifier, justifier. »</p></aside>
+</section>
+
+<section class="slide lab" data-block="C" data-ref="LAB-CODE" data-title="Lab Lecture du code et bibliothèques">
+  <div class="body">
+    <div class="badge">
+      <div class="k">À vous · Lab CODE</div>
+      <div class="id">CODE</div>
+      <h2>Lecture du code et bibliothèques</h2>
+      <div class="meta">
+        <div><span class="k2">Notion</span><span>EF6 · EF7</span></div>
+        <div><span class="k2">Durée</span><span class="time">1 h</span></div>
+      </div>
+    </div>
+    <div class="plan">
+      <div><h3>Objectif</h3><p class="lead">Expliquer le code en Plan, vérifier une explication, puis justifier et ajouter une bibliothèque.</p></div>
+      <div><h3>Étapes</h3><ol class="num-list" style="counter-reset:n 0"><li>Mode Plan : une phrase par fichier principal, trois risques</li><li>Modifier une valeur précise et constater le résultat annoncé</li><li>Lister les bibliothèques et justifier chacune en une phrase</li><li>Ajouter une bibliothèque d'export, vérifier sa licence, tester l'export</li></ol></div>
+      <div class="check"><h3>Point de contrôle</h3><ul class="checklist"><li>Une phrase par fichier, trois risques</li><li>Explication confirmée ou corrigée</li><li>Une justification par dépendance</li><li>Export fonctionnel</li></ul></div>
+    </div>
+  </div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Lab CODE : Lecture du code et bibliothèques, 1 h.</p></div></aside>
+</section>
+
+<section class="slide section" data-block="C" data-title="Lab Project Management">
+  <div class="letter">6</div>
+  <div class="kicker">Bloc 6 · Fil projet</div>
+  <h2>Lab Project Management</h2>
+  <p class="pages">Un suivi de projet : du besoin aux tâches, puis le suivi.</p>
+  <div class="meta"><span class="pill amber">Lab unique · 4 étapes · 1 h 15</span></div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Un projet se pilote comme une application.</p></div><p class="n-next">« Du besoin aux tâches : la méthode. »</p></aside>
+</section>
+
+<section class="slide dense" data-block="C" data-ref="PROJ" data-title="Du besoin aux tâches">
+  <div>
+    <div class="eyebrow">EF1 · Plan</div>
+    <h2 class="title">Du besoin aux tâches</h2>
+  </div>
+  <div class="body"><div class="steps" style="margin-top:24px"><div class="step"><h3>Besoin</h3><p>Décrit en langage simple</p></div><div class="step"><h3>User stories</h3><p>Qui, quoi, pourquoi</p></div><div class="step"><h3>Critères</h3><p>Ce qui prouve que c'est fait</p></div><div class="step"><h3>Tâches</h3><p>Petites, testables</p></div><div class="step"><h3>Suivi</h3><p>Statut et date</p></div></div></div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Cinq étapes, la même méthode que pour le RH.</p></div><p class="n-next">« Au lab : du cahier des charges au suivi. »</p></aside>
+</section>
+
+<section class="slide lab" data-block="C" data-ref="LAB-PROJ" data-title="Lab Lab Project Management · 4 étapes">
+  <div class="body">
+    <div class="badge">
+      <div class="k">À vous · Lab PROJ</div>
+      <div class="id">PROJ</div>
+      <h2>Lab Project Management · 4 étapes</h2>
+      <div class="meta">
+        <div><span class="k2">Notion</span><span>EF1 · EF5 · EF6 · Débogage</span></div>
+        <div><span class="k2">Durée</span><span class="time">1 h 15</span></div>
+      </div>
+    </div>
+    <div class="plan">
+      <div><h3>Objectif</h3><p class="lead">Passer du besoin aux tâches, puis suivre le projet et corriger un bug volontaire.</p></div>
+      <div><h3>Étapes</h3><ol class="num-list" style="counter-reset:n 0"><li>Plan : trois à cinq user stories avec critères et hors périmètre</li><li>Build : tâches avec statut, tester un ajout et un changement</li><li>Suivi : faire expliquer le code, corriger un risque</li><li>Bug volontaire : statut non sauvegardé, diagnostiquer, revenir au point de retour si besoin</li></ol></div>
+      <div class="check"><h3>Point de contrôle</h3><ul class="checklist"><li>User stories et hors périmètre écrits</li><li>Statut modifiable</li><li>Risque corrigé</li><li>Bug corrigé</li></ul></div>
+    </div>
+  </div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Lab PROJ : Lab Project Management · 4 étapes, 1 h 15.</p></div></aside>
+</section>
+
+<section class="slide section" data-block="D" data-title="Import et assets">
+  <div class="letter">7</div>
+  <div class="kicker">Bloc 7</div>
+  <h2>Import et assets</h2>
+  <p class="pages">Théorie et démonstration commentée, sans lab.</p>
+  <div class="meta"><span class="pill amber">20 min</span><span class="pill amber">Pas de manipulation</span></div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">On voit l'import et les assets, sans atelier.</p></div><p class="n-next">« Passons au mini CRM. »</p></aside>
+</section>
+
+<section class="slide dense" data-block="D" data-ref="IMPORT" data-title="Partir d'un fichier, habiller l'application">
+  <div>
+    <div class="eyebrow">EF2 · EF3</div>
+    <h2 class="title">Partir d'un fichier, habiller l'application</h2>
+  </div>
+  <div class="body"><div class="cols cols-3 stretch">
+    <div class="card"><div class="k">Import · EF3</div><h3>Une source Excel ou CSV</h3><p>replit.com/import : l'Agent construit l'application autour des lignes.</p></div>
+    <div class="card accent"><div class="k">Assets · EF2</div><h3>Logo, images, fichiers</h3><p>Dans le dossier assets, avec des noms clairs. Les fichiers sont cités dans le prompt.</p></div>
+    <div class="card bad"><div class="k">Vigilance</div><h3>Un chiffre de contrôle</h3><p>Après l'import, comparer le total au fichier d'origine avant de continuer.</p></div>
+  </div></div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Un fichier de départ, un contrôle, un point de reprise.</p></div><p class="n-next">« Passons au mini CRM. »</p></aside>
+</section>
+
+<section class="slide section" data-block="C" data-title="Lab mini site, formulaire et mini CRM">
+  <div class="letter">8</div>
+  <div class="kicker">Bloc 8 · Fil mini CRM</div>
+  <h2>Lab mini site, formulaire et mini CRM</h2>
+  <p class="pages">Un site vitrine, un formulaire, des leads, des prospects, et des actions prioritaires.</p>
+  <div class="meta"><span class="pill amber">Lab unique · 9 étapes · 2 h 55</span></div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Du visiteur au prospect, puis l'action prioritaire.</p></div><p class="n-next">« Voyons le parcours d'un visiteur. »</p></aside>
+</section>
+
+<section class="slide dense" data-block="C" data-ref="CRM" data-title="Du visiteur à l'action">
+  <div>
+    <div class="eyebrow">EF2 · EF8</div>
+    <h2 class="title">Du visiteur à l'action</h2>
+  </div>
+  <div class="body"><div class="steps" style="margin-top:24px"><div class="step"><h3>Visiteur</h3><p>Arrive sur le site</p></div><div class="step"><h3>Formulaire</h3><p>Lien public</p></div><div class="step"><h3>Lead</h3><p>Source, statut</p></div><div class="step"><h3>Prospect</h3><p>Fiche entreprise et contact</p></div><div class="step"><h3>Relance</h3><p>Date et filtre</p></div><div class="step"><h3>Priorité</h3><p>B2B d'abord</p></div><div class="step"><h3>Action</h3><p>Décidée par l'équipe</p></div></div></div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Sept étapes, et l'humain décide de l'action.</p></div><p class="n-next">« Dernier point technique : connecter. »</p></aside>
+</section>
+
+<section class="slide dense" data-block="C" data-ref="MCP" data-title="Connecter un outil, de deux façons">
+  <div>
+    <div class="eyebrow">EF8 · Intégrations</div>
+    <h2 class="title">Connecter un outil, de deux façons</h2>
+  </div>
+  <div class="body"><div class="cols cols-2 stretch">
+    <div class="card"><div class="k">Connecteur natif</div><h3>Connexion par le fournisseur</h3><p>Drive, Slack. On autorise l'accès sur l'écran du fournisseur, puis on peut le couper.</p></div>
+    <div class="card accent"><div class="k">Serveur MCP</div><h3>Un outil ajouté à l'Agent</h3><p>Installé en un clic. Utilisé dans le chat, puis retiré.</p></div>
+  </div>
+  <div class="callout warn" style="margin-top:22px"><span class="tag">Piège</span><p>Compte de test uniquement, aucune donnée réelle.</p></div></div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Deux façons de connecter, deux façons de couper.</p></div><p class="n-next">« Au lab : le site, le formulaire, le CRM. »</p></aside>
+</section>
+
+<section class="slide lab" data-block="C" data-ref="LAB-CRM" data-title="Lab Lab mini CRM · étapes 1 à 5">
+  <div class="body">
+    <div class="badge">
+      <div class="k">À vous · Lab CRM</div>
+      <div class="id">CRM</div>
+      <h2>Lab mini CRM · étapes 1 à 5</h2>
+      <div class="meta">
+        <div><span class="k2">Notion</span><span>EF2 · EF5 · EF8 · Débogage</span></div>
+        <div><span class="k2">Durée</span><span class="time">1 h 40</span></div>
+      </div>
+    </div>
+    <div class="plan">
+      <div><h3>Objectif</h3><p class="lead">Publier le site vitrine, relier le formulaire au CRM et vérifier la liaison de bout en bout.</p></div>
+      <div><h3>Étapes</h3><ol class="num-list" style="counter-reset:n 0"><li>Page vitrine : logo et image citées dans le prompt, publication</li><li>Formulaire de contact : nom, e-mail, besoin ; tester l'envoi et les champs obligatoires</li><li>Formulaire → CRM : chaque envoi crée un lead, source vérifiée</li><li>Connecteur de test (Drive ou Slack) et serveur MCP, puis déconnexion</li><li>Liaison de bout en bout : formulaire test, lead retrouvé, lien cassé corrigé</li></ol></div>
+      <div class="check"><h3>Point de contrôle</h3><ul class="checklist"><li>Logo et image affichés</li><li>Lead créé avec la bonne source</li><li>Accès connecteur coupés</li><li>Liaison fonctionnelle</li></ul></div>
+    </div>
+  </div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Lab CRM : Lab mini CRM · étapes 1 à 5, 1 h 40.</p></div><p class="n-next">« Suite du lab : leads, prospects et actions prioritaires. »</p></aside>
+</section>
+
+<section class="slide lab" data-block="C" data-ref="LAB-CRM" data-title="Lab Lab mini CRM · étapes 6 à 9">
+  <div class="body">
+    <div class="badge">
+      <div class="k">À vous · Lab CRM</div>
+      <div class="id">CRM</div>
+      <h2>Lab mini CRM · étapes 6 à 9</h2>
+      <div class="meta">
+        <div><span class="k2">Notion</span><span>EF5 · Build</span></div>
+        <div><span class="k2">Durée</span><span class="time">1 h 15</span></div>
+      </div>
+    </div>
+    <div class="plan">
+      <div><h3>Objectif</h3><p class="lead">Gérer les leads et les prospects, définir les actions prioritaires et organiser les relances.</p></div>
+      <div><h3>Étapes</h3><ol class="num-list" style="counter-reset:n 5"><li>Leads à la main : trois leads, source Manuelle, statuts Nouveau, Contacté, Qualifié, Gagné, Perdu</li><li>Prospects : fiche entreprise et contact, un lead qualifié passé en prospect</li><li>Actions prioritaires : classer par priorité, demandes B2B en tête, trois actions écrites</li><li>Relances : date de relance, filtre par statut ou priorité, export de la liste</li></ol></div>
+      <div class="check"><h3>Point de contrôle</h3><ul class="checklist"><li>Trois leads, statut modifié</li><li>Fiche prospect complète</li><li>Trois actions écrites, B2B en tête</li><li>Export ouvert</li></ul></div>
+    </div>
+  </div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Lab CRM : Lab mini CRM · étapes 6 à 9, 1 h 15.</p></div></aside>
+</section>
+
+<section class="slide section" data-block="D" data-title="Débogage">
+  <div class="letter">9</div>
+  <div class="kicker">Bloc 9 · Débogage</div>
+  <h2>Débogage</h2>
+  <p class="pages">Tout le débogage de la formation : une méthode, puis cinq cas.</p>
+  <div class="meta"><span class="pill amber">Théorie 15 min</span><span class="pill amber">Lab 1 h 15 · 5 cas</span></div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">On explique, on choisit, on corrige une fois.</p></div><p class="n-next">« La méthode en cinq temps. »</p></aside>
+</section>
+
+<section class="slide dense" data-block="D" data-ref="DEBUG" data-title="Méthode en cinq temps">
+  <div>
+    <div class="eyebrow">Débogage</div>
+    <h2 class="title">Méthode en cinq temps</h2>
+  </div>
+  <div class="body"><div class="steps" style="margin-top:24px"><div class="step"><h3>Expliquer</h3><p>En Plan, sans rien modifier</p></div><div class="step"><h3>Choisir</h3><p>La cause la plus probable</p></div><div class="step"><h3>Corriger</h3><p>En Build, une seule correction</p></div><div class="step"><h3>Tester</h3><p>Sur le cas qui a échoué</p></div><div class="step"><h3>Revenir</h3><p>Au point de retour si ça aggrave</p></div></div></div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Cinq temps : jamais deux corrections à la fois.</p></div><p class="n-next">« Et les réflexes face à l'IA qui se trompe. »</p></aside>
+</section>
+
+<section class="slide dense" data-block="D" data-ref="DEBUG2" data-title="Quand l'IA se trompe">
+  <div>
+    <div class="eyebrow">Débogage</div>
+    <h2 class="title">Quand l'IA se trompe</h2>
+  </div>
+  <div class="body"><table class="tbl tight roomy"><tr><th>Symptôme</th><th>Réflexe</th></tr><tr><td>Le résultat est faux</td><td>Tester avec un cas dont on connaît la réponse</td></tr><tr><td>Le code a cassé</td><td>Revenir au point de retour</td></tr><tr><td>Une information est inventée</td><td>Vérifier la source, laisser « inconnu »</td></tr><tr><td>Une clé apparaît dans le code</td><td>Révoquer, puis déplacer dans les Secrets</td></tr></table></div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Chaque symptôme a un réflexe.</p></div><p class="n-next">« Au lab : cinq cas, un par diagnostic. »</p></aside>
+</section>
+
+<section class="slide lab" data-block="D" data-ref="LAB-DBG" data-title="Lab Lab Débogage · 5 cas">
+  <div class="body">
+    <div class="badge">
+      <div class="k">À vous · Lab DBG</div>
+      <div class="id">DBG</div>
+      <h2>Lab Débogage · 5 cas</h2>
+      <div class="meta">
+        <div><span class="k2">Notion</span><span>Débogage</span></div>
+        <div><span class="k2">Durée</span><span class="time">1 h 15</span></div>
+      </div>
+    </div>
+    <div class="plan">
+      <div><h3>Objectif</h3><p class="lead">Appliquer la méthode en cinq temps à cinq cas, un par fil.</p></div>
+      <div><h3>Étapes</h3><ol class="num-list" style="counter-reset:n 0"><li>Cas RH : un CV mal lu</li><li>Cas Finance : un montant aberrant qui passe le contrôle</li><li>Cas Ticketing : une assignation invalide</li><li>Cas Projet : un statut non sauvegardé</li><li>Cas CRM : un formulaire qui ne crée plus de lead</li></ol></div>
+      <div class="check"><h3>Point de contrôle</h3><ul class="checklist"><li>Cause identifiée à chaque cas</li><li>Une seule correction par cas</li><li>Retour arrière testé si besoin</li></ul></div>
+    </div>
+  </div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Lab DBG : Lab Débogage · 5 cas, 1 h 15.</p></div></aside>
+</section>
+
+<section class="slide section" data-block="D" data-title="Routines, sécurité et déploiement">
+  <div class="letter">10</div>
+  <div class="kicker">Bloc 10</div>
+  <h2>Routines, sécurité et déploiement</h2>
+  <p class="pages">Automatiser sans risque, protéger ses secrets, publier une application.</p>
+  <div class="meta"><span class="pill amber">Lab unique · 3 étapes · 50 min</span></div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Une routine ne doit rien envoyer ni modifier sans nous.</p></div><p class="n-next">« Les routines, puis la sécurité. »</p></aside>
+</section>
+
+<section class="slide dense" data-block="D" data-ref="ROUT" data-title="Routines et checklist de sécurité">
+  <div>
+    <div class="eyebrow">EF9 · EF4</div>
+    <h2 class="title">Routines et checklist de sécurité</h2>
+  </div>
+  <div class="body"><div class="cols cols-2 stretch">
+    <div class="card"><div class="k">Routine</div><h3>Relance planifiée</h3><p>Un travail qui revient chaque semaine. Budget fixé, aucune action irréversible.</p></div>
+    <div class="card bad"><div class="k">Règle</div><h3>Résumer, pas agir</h3><p>Pas d'envoi, pas de modification de fichier. Une heure minimum entre deux exécutions.</p></div>
+  </div>
+  <div class="card" style="margin-top:24px"><div class="k">Avant l'URL publique</div>
+    <ul class="checklist" style="font-size:26px;margin-top:8px"><li>Aucune donnée réelle dans le projet</li><li>Clés dans Secrets, jamais dans le code</li><li>Connecteurs limités au compte de test</li><li>Validation humaine avant tout envoi</li><li>Code relu avant publication</li></ul>
+  </div></div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Une routine résume, elle n'agit pas seule. Cinq points avant de publier.</p></div><p class="n-next">« Au lab : la routine, les secrets, la mise en ligne. »</p></aside>
+</section>
+
+<section class="slide lab" data-block="D" data-ref="LAB-DEPLOY" data-title="Lab Lab Routines et mise en ligne">
+  <div class="body">
+    <div class="badge">
+      <div class="k">À vous · Lab DEPLOY</div>
+      <div class="id">DEPLOY</div>
+      <h2>Lab Routines et mise en ligne</h2>
+      <div class="meta">
+        <div><span class="k2">Notion</span><span>EF9 · EF4 · Déploiement</span></div>
+        <div><span class="k2">Durée</span><span class="time">50 min</span></div>
+      </div>
+    </div>
+    <div class="plan">
+      <div><h3>Objectif</h3><p class="lead">Planifier une routine qui résume, révoquer la clé de test et publier l'application.</p></div>
+      <div><h3>Étapes</h3><ol class="num-list" style="counter-reset:n 0"><li>Routine hebdomadaire : résumé en cinq lignes, sans envoi ni modification, intervalle d'une heure minimum</li><li>Secrets : révoquer la clé de test, chercher une clé dans le code</li><li>Mise en ligne : passer la checklist, publier (Deployments), tester un parcours sur l'URL publique</li></ol></div>
+      <div class="check"><h3>Point de contrôle</h3><ul class="checklist"><li>Résumé lu, budget fixé</li><li>Aucune clé dans le code</li><li>URL publique accessible, parcours testé</li></ul></div>
+    </div>
+  </div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Lab DEPLOY : Lab Routines et mise en ligne, 50 min.</p></div></aside>
+</section>
+
+<section class="slide section" data-block="E" data-title="Récapitulatif">
+  <div class="letter">11</div>
+  <div class="kicker">Bloc 11</div>
+  <h2>Récapitulatif</h2>
+  <p class="pages">Tout ce qui a été vu, relié aux labs et aux neuf éléments fondamentaux.</p>
+  <div class="meta"><span class="pill amber">Théorie · 1 h 30</span></div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Un seul tour d'horizon, avant les questions.</p></div><p class="n-next">« Où a-t-on vu chaque élément ? »</p></aside>
+</section>
+
+<section class="slide dense" data-block="E" data-ref="RECAP" data-title="Neuf éléments, où on les a vus">
+  <div>
+    <div class="eyebrow">Récapitulatif</div>
+    <h2 class="title">Neuf éléments, où on les a vus</h2>
+  </div>
+  <div class="body"><table class="tbl tight roomy"><tr><th>Élément</th><th>Notion</th><th>Vu dans les blocs</th></tr><tr><td>EF1</td><td>Mode Plan</td><td>1, 2, 6</td></tr><tr><td>EF2</td><td>Assets</td><td>7, 8</td></tr><tr><td>EF3</td><td>Import</td><td>7</td></tr><tr><td>EF4</td><td>Secrets et clés API</td><td>2, 10</td></tr><tr><td>EF5</td><td>Mode Build</td><td>1, 2, 3, 4, 6, 8</td></tr><tr><td>EF6</td><td>Lecture du code</td><td>5, 6</td></tr><tr><td>EF7</td><td>Library et dépendances</td><td>5</td></tr><tr><td>EF8</td><td>Intégrations et MCP</td><td>3 (à confirmer), 8</td></tr><tr><td>EF9</td><td>Routines</td><td>10</td></tr></table></div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Neuf éléments, cinq fils rouges, une seule méthode.</p></div><p class="n-next">« Une règle à retenir, avant les questions. »</p></aside>
+</section>
+
+<section class="slide key" data-block="E" data-ref="RECAP" data-title="Vérifier avant de valider">
+  <div class="big">Vérifier avant de <em>valider</em>.</div>
+  <div class="from">Replit Agent · neuf éléments · un seul réflexe</div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Le réflexe qui compte : relire, tester, revenir en arrière si besoin.</p></div><p class="n-next">« Vos questions. »</p></aside>
+</section>
+
+<section class="slide dense" data-block="E" data-ref="CLOTURE" data-title="Ce que vous savez faire">
+  <div>
+    <div class="eyebrow">Pour conclure</div>
+    <h2 class="title">Ce que vous savez faire</h2>
+  </div>
+  <div class="body"><div class="cols cols-2 stretch">
+    <div class="card good"><div class="k">Vous savez faire</div><ul><li>Planifier en Plan, construire en Build</li><li>Ajouter, utiliser, révoquer une clé API</li><li>Importer un fichier, construire un CRM</li><li>Connecter un outil, planifier une routine</li></ul></div>
+    <div class="card"><div class="k">À clarifier avec le formateur</div><ul class="small"><li>Budget de crédits par participant</li><li>Qui fournit la clé API et qui paie les appels</li><li>Offre Replit réelle des participants</li></ul></div>
+  </div>
+  <div class="callout tip" style="margin-top:16px"><span class="tag">Un seul devoir</span><p>Reprendre votre cahier des charges v0 et le <strong>préciser</strong> à la lumière de ce qui a été construit.</p></div></div>
+  <aside class="notes"><div class="n-oral"><p class="o-cle">Merci à tous. Les neuf éléments sont la boîte à outils.</p></div></aside>
+</section>
+</div>
+<!-- ======================= chrome ======================= -->
+<div id="progress"></div>
+<div id="footer">
+  <div class="blk"><span class="dot" id="f-dot"></span><span id="f-block">Fondamentaux</span><span id="f-ref"></span></div>
+  <div class="blk"><span class="timer" id="f-timer">00:00</span><span class="num" id="f-num">1 / 1</span></div>
+</div>
+<div id="hint">← → naviguer · P fenêtre présentateur · O sommaire · ? aide</div>
+<div id="help">
+  <h3>Raccourcis</h3>
+  <table>
+    <tr><td><kbd>→</kbd> <kbd>Espace</kbd> <kbd>Entrée</kbd></td><td>élément suivant, puis slide suivante</td></tr>
+    <tr><td><kbd>←</kbd> <kbd>Retour</kbd></td><td>slide précédente</td></tr>
+    <tr><td><kbd>Début</kbd> / <kbd>Fin</kbd></td><td>première / dernière slide</td></tr>
+    <tr><td><kbd>12</kbd> puis <kbd>Entrée</kbd></td><td>aller à la slide 12</td></tr>
+    <tr><td><kbd>O</kbd></td><td>sommaire (cliquer pour sauter)</td></tr>
+    <tr><td><kbd>P</kbd></td><td><b>fenêtre présentateur</b> — à ouvrir sur votre écran, la salle ne la voit pas</td></tr>
+    <tr><td><kbd>N</kbd></td><td>notes dans cette fenêtre (panneau latéral) — <b>visible par la salle si l'écran est dupliqué</b></td></tr>
+    <tr><td><kbd>F</kbd></td><td>plein écran</td></tr>
+    <tr><td><kbd>T</kbd></td><td>remettre le chronomètre à zéro</td></tr>
+    <tr><td><kbd>B</kbd></td><td>écran noir (pause)</td></tr>
+    <tr><td><kbd>Ctrl</kbd>+<kbd>P</kbd></td><td>imprimer / exporter en PDF (thème clair, une slide par page)</td></tr>
+    <tr><td><kbd>Échap</kbd></td><td>fermer</td></tr>
+  </table>
+  <p style="margin-top:28px;color:var(--ink-3);font-size:18px">Le lien <code>#numéro</code> dans l'adresse renvoie directement à une slide.</p>
+</div>
+<div id="toc"><h3>Sommaire</h3><div class="grid" id="toc-grid"></div></div>
+<div id="notes"><h4>Notes de l'animateur</h4><div id="notes-body"></div></div>
+<div id="blackout" style="position:fixed;inset:0;background:#000;display:none;z-index:30"></div>
+
+<script>
+(function(){
+  const stage=document.getElementById('stage');
+  const slides=[...stage.querySelectorAll('.slide')];
+  const total=slides.length;
+  const blocks={A:'Socle et Agent',B:'Fils rouges · RH, Ticketing, Finance',C:'Code, projet et mini CRM',D:'Import, débogage et routines',E:'Récapitulatif'};
+  let cur=-1, typed='', t0=Date.now();
+  const $=id=>document.getElementById(id);
+
+  function fit(){
+    const notesW=document.body.classList.contains('notes-open')?420:0;
+    const iw=innerWidth-notesW, ih=innerHeight;
+    const s=Math.min(iw/1920, ih/1080);
+    stage.style.transform=`translate(${(iw-1920*s)/2}px,${(ih-1080*s)/2}px) scale(${s})`;
+  }
+  function titleOf(sl){
+    if(sl.dataset.title) return sl.dataset.title;
+    const h=sl.querySelector('h2, h1, .big');
+    return h?h.textContent.trim().replace(/\s+/g,' '):('Slide');
+  }
+  function go(n,opts={}){
+    n=Math.max(0,Math.min(total-1,n));
+    if(n===cur && !opts.force) return;
+    if(cur>=0) slides[cur].classList.remove('active');
+    cur=n;
+    const sl=slides[cur];
+    sl.classList.add('active');
+    const frs=[...sl.querySelectorAll('.fragment')];
+    const showAll=!!opts.showAll||/[?&]all/.test(location.search);
+    frs.forEach(f=>{f.classList.remove('past');f.classList.toggle('visible',showAll)});
+    history.replaceState(null,'','#'+(cur+1));
+    $('progress').style.width=((cur+1)/total*100)+'%';
+    $('f-num').textContent=(cur+1)+' / '+total;
+    const b=sl.dataset.block||'E';
+    $('f-dot').className='dot '+b;
+    $('f-block').textContent=blocks[b]||blocks.E;
+    $('f-ref').textContent=sl.dataset.ref?('· '+sl.dataset.ref):'';
+    renderNotes();
+    pushPresenter();
+    [...document.querySelectorAll('#toc-grid a')].forEach((a,i)=>a.classList.toggle('cur',i===cur));
+  }
+  function next(){
+    const sl=slides[cur];
+    const frs=[...sl.querySelectorAll('.fragment')];
+    const hidden=frs.find(f=>!f.classList.contains('visible'));
+    if(hidden){
+      frs.filter(f=>f.classList.contains('visible')).forEach(f=>f.classList.add('past'));
+      hidden.classList.add('visible');
+      return;
+    }
+    go(cur+1);
+  }
+  function prev(){
+    const sl=slides[cur];
+    const vis=[...sl.querySelectorAll('.fragment.visible')];
+    if(vis.length){
+      const last=vis[vis.length-1];
+      last.classList.remove('visible','past');
+      vis.forEach(f=>f.classList.remove('past'));
+      return;
+    }
+    go(cur-1,{showAll:true});
+  }
+  function renderNotes(){
+    const sl=slides[cur];
+    const a=sl.querySelector('aside.notes');
+    const nx=slides[cur+1];
+    $('notes-body').innerHTML=
+      '<div class="n-title">'+(cur+1)+' · '+titleOf(sl)+'</div>'+
+      (a?a.innerHTML:'<p class="dim">Pas de notes pour cette slide.</p>')+
+      (nx?'<div class="next">Suivante : '+titleOf(nx)+'</div>':'');
+  }
+  function buildToc(){
+    const g=$('toc-grid');
+    g.innerHTML='';
+    slides.forEach((sl,i)=>{
+      const a=document.createElement('a');
+      a.className=(sl.classList.contains('section')?'sec ':'')+(sl.classList.contains('lab')?'lab ':'')+(sl.classList.contains('cover')?'sec ':'');
+      a.innerHTML='<span class="n">'+(i+1)+'</span><span>'+titleOf(sl)+'</span>';
+      a.addEventListener('click',()=>{go(i,{showAll:false});closeAll();});
+      g.appendChild(a);
+    });
+  }
+  function closeAll(){$('help').classList.remove('open');$('toc').classList.remove('open');}
+  function toggle(id){const el=$(id);const open=el.classList.contains('open');closeAll();if(!open)el.classList.add('open');}
+  function toggleNotes(){document.body.classList.toggle('notes-open');$('notes').classList.toggle('open');fit();}
+  // --- fenêtre présentateur : une seconde fenêtre, sur l'écran du formateur ---
+  let presenterWin = null;
+  function presenterHTML(){
+    return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>Présentateur — Fondamentaux Replit</title>
+<style>
+:root{--bg:#0D1B2A;--bg2:#122436;--line:#2E4A66;--ink:#F3EDE2;--ink2:#B9C4D2;--ink3:#7F90A5;--accent:#F2B441;--ok:#5FD3A6}
+.n-oral:before,.n-do:before,.n-debrief:before,.n-next:before,.n-idea:before,.n-say:before{display:block;font-family:"IBM Plex Mono",Consolas,monospace;font-size:12px;font-weight:400;font-style:normal;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.n-oral:before{content:"À dire"}
+.n-oral .o-cle{font-family:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;font-size:28px;font-weight:700;line-height:1.18;color:var(--accent);margin:0 0 8px}
+.n-oral .o-rep{font-family:"IBM Plex Mono",Consolas,monospace;font-size:15px;letter-spacing:.02em;color:var(--ink3);margin:0 0 12px;padding-bottom:12px;border-bottom:1px dashed var(--line)}
+.n-oral p{margin:.45em 0;font-size:21px;line-height:1.45;color:var(--ink)}
+.n-oral .o-pause{font-size:17px;font-style:italic;color:var(--ok)}
+.n-oral .o-pause:before{content:"⏸ "}
+.n-do,.n-debrief,.n-next,.n-idea,.n-say{margin:16px 0 0;padding-top:12px;border-top:1px solid var(--line)}
+.n-do:before{content:"À faire"}.n-debrief:before{content:"Débrief";color:var(--ok)}.n-next:before{content:"Transition"}
+.n-do li{color:var(--ink2)}
+.n-next{color:var(--ink2);font-style:italic}
+.n-idea:before{content:"Intention";color:var(--ink3)}.n-say:before{content:"Version développée";color:var(--ink3)}
+.n-idea{border-top-style:dashed;color:var(--ink2)}.n-say{border-top:0;padding-top:0}.n-say p{margin:.5em 0;color:var(--ink2)}
+body:not(.dev) .n-idea,body:not(.dev) .n-say{display:none}
+*{box-sizing:border-box}body{margin:0;padding:22px;background:var(--bg);color:var(--ink);
+font-family:"IBM Plex Sans","Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:17px;line-height:1.5}
+header{display:flex;align-items:baseline;gap:18px;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:18px}
+h1{font-size:22px;margin:0;font-weight:700}
+.meta{margin-left:auto;font-family:"IBM Plex Mono",Consolas,monospace;font-size:15px;color:var(--ink3);letter-spacing:.06em}
+#t{font-size:30px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums}
+#notes ul{padding-left:1.1em}#notes li{margin:.5em 0}
+#notes code{background:#183048;padding:.08em .35em;border-radius:5px;font-family:"IBM Plex Mono",Consolas,monospace;font-size:.92em}
+#notes b,#notes strong{color:#fff}
+.next{margin-top:22px;padding-top:14px;border-top:1px solid var(--line);color:var(--ink3);font-size:15px}
+.next b{color:var(--ink2)}
+.hint{margin-top:18px;font-size:13px;color:var(--ink3)}
+.empty{color:var(--ink3);font-style:italic}
+</style></head><body>
+<header><h1 id="ti">…</h1><div class="meta"><span id="num"></span> · <span id="t">00:00</span></div></header>
+<div id="notes"></div><div class="next" id="next"></div>
+<p class="hint">Les flèches de cette fenêtre pilotent aussi le diaporama. <b>D</b> affiche ou masque la version développée. Gardez la fenêtre du diaporama sur l'écran projeté.</p>
+<script>
+const bc = new BroadcastChannel('replit-deck');
+bc.onmessage = e => {
+  const d = e.data;
+  document.getElementById('ti').textContent = d.n + ' · ' + d.title;
+  document.getElementById('num').textContent = d.n + ' / ' + d.total;
+  document.getElementById('t').textContent = d.timer;
+  document.getElementById('notes').innerHTML = d.notes || '<p class="empty">Pas de notes pour cette diapositive.</p>';
+  document.getElementById('next').innerHTML = d.next ? 'Suivante : <b>' + d.next + '</b>' : 'Dernière diapositive.';
+  document.title = d.n + '/' + d.total + ' — ' + d.title;
+};
+addEventListener('keydown', ev => {
+  const k = ev.key;
+  if (k === 'd' || k === 'D') { document.body.classList.toggle('dev'); return; }
+  if (['ArrowRight','ArrowLeft',' ','PageDown','PageUp','Enter','Backspace','Home','End'].includes(k)) {
+    bc.postMessage({key: k}); ev.preventDefault();
+  }
+});
+bc.postMessage({hello: true});
+<\/script></body></html>`;
+  }
+  const bc = ('BroadcastChannel' in window) ? new BroadcastChannel('replit-deck') : null;
+  function pushPresenter(){
+    if(!bc) return;
+    const sl=slides[cur], a=sl.querySelector('aside.notes'), nx=slides[cur+1];
+    bc.postMessage({n:cur+1,total,title:titleOf(sl),notes:a?a.innerHTML:'',next:nx?titleOf(nx):'',timer:$('f-timer').textContent});
+  }
+  if(bc) bc.onmessage = e => {
+    const d=e.data||{};
+    if(d.hello){ pushPresenter(); return; }
+    if(!d.key) return;
+    switch(d.key){
+      case 'ArrowRight': case ' ': case 'PageDown': case 'Enter': next(); break;
+      case 'ArrowLeft': case 'PageUp': case 'Backspace': prev(); break;
+      case 'Home': go(0); break;
+      case 'End': go(total-1,{showAll:true}); break;
+    }
+  };
+  function openPresenter(){
+    if(!bc){ alert("Cette fenêtre ne peut pas se synchroniser (navigateur trop ancien). Utilisez le conducteur imprimé, ou la touche N."); return; }
+    if(presenterWin && !presenterWin.closed){ presenterWin.focus(); pushPresenter(); return; }
+    presenterWin = open('', 'replit-deck-presenter', 'width=760,height=900');
+    if(!presenterWin){ alert("Le navigateur a bloqué la fenêtre présentateur. Autorisez les fenêtres surgissantes pour cette page, puis appuyez de nouveau sur P."); return; }
+    presenterWin.document.write(presenterHTML());
+    presenterWin.document.close();
+    setTimeout(pushPresenter, 120);
+  }
+  function tick(){const s=Math.floor((Date.now()-t0)/1000);const m=String(Math.floor(s/60)).padStart(2,'0'),ss=String(s%60).padStart(2,'0');$('f-timer').textContent=m+':'+ss;pushPresenter();}
+  setInterval(tick,1000);
+
+  addEventListener('keydown',e=>{
+    if(e.ctrlKey||e.metaKey||e.altKey) return;
+    const k=e.key;
+    if(k>='0'&&k<='9'){typed+=k;return;}
+    if(k==='Enter'&&typed){const n=parseInt(typed,10);typed='';go(n-1);e.preventDefault();return;}
+    switch(k){
+      case 'ArrowRight':case ' ':case 'PageDown':case 'Enter':case 'l':case 'ArrowDown': next();e.preventDefault();break;
+      case 'ArrowLeft':case 'PageUp':case 'Backspace':case 'h':case 'ArrowUp': prev();e.preventDefault();break;
+      case 'Home': go(0);break;
+      case 'End': go(total-1,{showAll:true});break;
+      case 'f':case 'F': document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();break;
+      case 'n':case 'N': toggleNotes();break;
+      case 'p':case 'P': openPresenter();break;
+      case 'o':case 'O':case 'g':case 'G': toggle('toc');break;
+      case '?': toggle('help');break;
+      case 't':case 'T': t0=Date.now();tick();break;
+      case 'b':case 'B': {const bo=$('blackout');bo.style.display=bo.style.display==='none'?'block':'none';break;}
+      case 'Escape': closeAll();$('blackout').style.display='none';break;
+    }
+    typed='';
+  });
+  stage.addEventListener('click',e=>{
+    if(e.target.closest('a,button,input,textarea,summary')) return;
+    const r=stage.getBoundingClientRect();
+    ((e.clientX-r.left)/r.width<0.25)?prev():next();
+  });
+  let tx=null;
+  addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});
+  addEventListener('touchend',e=>{if(tx===null)return;const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>60){dx<0?next():prev();}tx=null;});
+  addEventListener('resize',fit);
+  addEventListener('hashchange',()=>{const n=parseInt(location.hash.slice(1),10);if(n&&n-1!==cur)go(n-1);});
+  addEventListener('beforeprint',()=>{slides.forEach(s=>s.classList.add('active'))});
+  addEventListener('afterprint',()=>{slides.forEach((s,i)=>s.classList.toggle('active',i===cur))});
+
+  if(/[?&]static/.test(location.search)) document.body.classList.add('static');
+  buildToc();
+  fit();
+  const start=parseInt(location.hash.slice(1),10);
+  go(start?start-1:0,{force:true});
+  setTimeout(()=>$('hint').classList.add('hide'),7000);
+})();
+</script>
+
+</body>
+</html>
