@@ -43,4 +43,4 @@ Cinq fils métier, construits sur **Atelier Nova** (agence d'événementiel et d
 | 9 | Débogage · Cinq cas, un par fil | 5 cas | 1 h 15 |
 | 10 | Routines, secrets et mise en ligne | 3 | 50 min |
 
-Le bloc 11 (récapitulatif) clôt la formation en théorie, sans lab. Détail complet, prompts à coller et données fournies : [`/README.md`](/README.md).
+Le bloc 11 (récapitulatif) clôt la formation en théorie, sans lab. Détail complet, prompts à coller et données fournies : [`/README.md`](replit/README.md).
