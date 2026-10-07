@@ -19,7 +19,7 @@ Cinq fils métier, construits sur **Atelier Nova** (agence d'événementiel et d
 
 ## Public et prérequis
 
-- **Public** : étudiants de Master et professionnels qui veulent concevoir une application métier avec l'IA, quel que soit leur domaine.
+- **Public** : étudiants  et professionnels qui veulent concevoir une application métier avec l'IA, quel que soit leur domaine.
 - **Prérequis** : aucun en programmation. Le code généré par l'Agent est lu et compris, pas écrit à la main.
 - **Matériel** : un ordinateur, une connexion internet, un compte Replit avec l'Agent et le déploiement activés.
 
