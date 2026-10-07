@@ -41,7 +41,7 @@ Le bloc 11 (récapitulatif) est une théorie de clôture, sans lab : voir la pr�
 | 💬 Note | Précision ou nuance sur la notion |
 | 🆘 Si ça coince | Dépannage, en fin de fichier |
 
-Référence complète du programme : [`Plan_Formation_Replit.docx`](Plan_Formation_Replit.docx) · Support de présentation : [`Fondamentaux-Replit/formation-replit.html`](../Fondamentaux-Replit/formation-replit.html)
+Référence complète du programme : [`Plan_Formation_Replit.docx`](Plan_Formation_Replit.docx) · Support de présentation : [`Formation-Replit/replit/formation-replit.html`](../Formation-Replit/replit/formation-replit.html)
 
 ## Anciens labs
 
