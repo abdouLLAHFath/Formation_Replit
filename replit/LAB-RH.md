@@ -29,8 +29,7 @@ Je veux une application qui aide à recruter un·e coordinateur·rice
 administratif·ve pour Atelier Nova, agence d'événementiel. Les
 administrateurs créent une offre (titre, description, compétences,
 lieu, type de contrat), puis téléversent des CV pour cette offre.
-Pose-moi les questions nécessaires, puis propose un cahier des
-charges v0 : user stories, critères d'acceptation, hors périmètre.
+propose un cahier des charges v0 : user stories, critères d'acceptation, hors périmètre.
 ```
 
 > [!TIP]
