@@ -1,0 +1,111 @@
+<svg width="400" height="260" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration d'un bouquet de fleurs enveloppé de papier">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F8F1E4"/>
+      <stop offset="1" stop-color="#EFE1C8"/>
+    </linearGradient>
+    <linearGradient id="wrapGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FBF7EF"/>
+      <stop offset="1" stop-color="#EFE4CC"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="260" fill="url(#bgGrad)"/>
+  <ellipse cx="200" cy="246" rx="95" ry="10" fill="#C9B896" opacity=".35"/>
+
+  <!-- tiges -->
+  <g fill="none" stroke="#5B7A5B" stroke-width="4" stroke-linecap="round">
+    <path d="M200,165 C195,130 205,110 200,88"/>
+    <path d="M200,165 C172,142 152,122 136,100"/>
+    <path d="M200,165 C228,142 248,122 264,100"/>
+    <path d="M200,165 C182,150 168,145 152,133"/>
+    <path d="M200,165 C218,150 232,145 248,133"/>
+  </g>
+
+  <!-- feuilles -->
+  <g fill="#5B7A5B">
+    <path d="M170,142 C158,132 158,114 170,102 C182,114 182,132 170,142 Z" transform="rotate(-25 170 122)"/>
+    <path d="M230,142 C218,132 218,114 230,102 C242,114 242,132 230,142 Z" transform="rotate(25 230 122)"/>
+    <path d="M200,118 C190,110 190,96 200,86 C210,96 210,110 200,118 Z"/>
+    <path d="M158,128 C150,122 150,110 158,102 C166,110 166,122 158,128 Z" transform="rotate(-18 158 115)"/>
+  </g>
+
+  <!-- papier et ruban -->
+  <path d="M165,260 L150,166 Q200,148 250,166 L235,260 Z" fill="url(#wrapGrad)" stroke="#D9C9A8" stroke-width="1.5"/>
+  <path d="M181,166 L186,256" stroke="#E3D6BC" stroke-width="2" fill="none"/>
+  <path d="M219,166 L214,256" stroke="#E3D6BC" stroke-width="2" fill="none"/>
+  <rect x="150" y="190" width="100" height="15" rx="2" fill="#B8791A"/>
+  <path d="M200,198 L177,184 L177,212 Z" fill="#8C5A14"/>
+  <path d="M200,198 L223,184 L223,212 Z" fill="#8C5A14"/>
+  <circle cx="200" cy="198" r="6" fill="#6B4310"/>
+
+  <!-- fleurs : pétales en rosace autour d'un cœur -->
+  <g transform="translate(135,95) rotate(-8)">
+    <g fill="#B8791A">
+      <ellipse cx="0" cy="-15" rx="8" ry="13" transform="rotate(0)"/>
+      <ellipse cx="0" cy="-15" rx="8" ry="13" transform="rotate(60)"/>
+      <ellipse cx="0" cy="-15" rx="8" ry="13" transform="rotate(120)"/>
+      <ellipse cx="0" cy="-15" rx="8" ry="13" transform="rotate(180)"/>
+      <ellipse cx="0" cy="-15" rx="8" ry="13" transform="rotate(240)"/>
+      <ellipse cx="0" cy="-15" rx="8" ry="13" transform="rotate(300)"/>
+    </g>
+    <circle r="7" fill="#6B4A24"/>
+  </g>
+
+  <g transform="translate(265,95) rotate(8)">
+    <g fill="#C98A63">
+      <ellipse cx="0" cy="-15" rx="8" ry="13" transform="rotate(0)"/>
+      <ellipse cx="0" cy="-15" rx="8" ry="13" transform="rotate(60)"/>
+      <ellipse cx="0" cy="-15" rx="8" ry="13" transform="rotate(120)"/>
+      <ellipse cx="0" cy="-15" rx="8" ry="13" transform="rotate(180)"/>
+      <ellipse cx="0" cy="-15" rx="8" ry="13" transform="rotate(240)"/>
+      <ellipse cx="0" cy="-15" rx="8" ry="13" transform="rotate(300)"/>
+    </g>
+    <circle r="7" fill="#6B4A24"/>
+  </g>
+
+  <g transform="translate(150,130) scale(.72)">
+    <g fill="#E3A15B">
+      <ellipse cx="0" cy="-15" rx="8" ry="13" transform="rotate(0)"/>
+      <ellipse cx="0" cy="-15" rx="8" ry="13" transform="rotate(60)"/>
+      <ellipse cx="0" cy="-15" rx="8" ry="13" transform="rotate(120)"/>
+      <ellipse cx="0" cy="-15" rx="8" ry="13" transform="rotate(180)"/>
+      <ellipse cx="0" cy="-15" rx="8" ry="13" transform="rotate(240)"/>
+      <ellipse cx="0" cy="-15" rx="8" ry="13" transform="rotate(300)"/>
+    </g>
+    <circle r="7" fill="#8C6A3F"/>
+  </g>
+
+  <g transform="translate(250,130) scale(.72)">
+    <g fill="#E8C27A">
+      <ellipse cx="0" cy="-15" rx="8" ry="13" transform="rotate(0)"/>
+      <ellipse cx="0" cy="-15" rx="8" ry="13" transform="rotate(60)"/>
+      <ellipse cx="0" cy="-15" rx="8" ry="13" transform="rotate(120)"/>
+      <ellipse cx="0" cy="-15" rx="8" ry="13" transform="rotate(180)"/>
+      <ellipse cx="0" cy="-15" rx="8" ry="13" transform="rotate(240)"/>
+      <ellipse cx="0" cy="-15" rx="8" ry="13" transform="rotate(300)"/>
+    </g>
+    <circle r="7" fill="#8C6A3F"/>
+  </g>
+
+  <g transform="translate(200,78)">
+    <g fill="#D97757">
+      <ellipse cx="0" cy="-17" rx="9" ry="15" transform="rotate(0)"/>
+      <ellipse cx="0" cy="-17" rx="9" ry="15" transform="rotate(60)"/>
+      <ellipse cx="0" cy="-17" rx="9" ry="15" transform="rotate(120)"/>
+      <ellipse cx="0" cy="-17" rx="9" ry="15" transform="rotate(180)"/>
+      <ellipse cx="0" cy="-17" rx="9" ry="15" transform="rotate(240)"/>
+      <ellipse cx="0" cy="-17" rx="9" ry="15" transform="rotate(300)"/>
+    </g>
+    <circle r="8" fill="#8C6A3F"/>
+  </g>
+
+  <!-- petites fleurs de remplissage -->
+  <g fill="#FBF7EF" stroke="#D9C9A8" stroke-width="1">
+    <circle cx="190" cy="52" r="3.5"/>
+    <circle cx="212" cy="48" r="3"/>
+    <circle cx="168" cy="68" r="3"/>
+    <circle cx="232" cy="68" r="3"/>
+    <circle cx="200" cy="38" r="3"/>
+  </g>
+</svg>

@@ -1,0 +1,11 @@
+<svg width="360" height="100" viewBox="0 0 360 100" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Logo Atelier Nova">
+  <defs>
+    <style>
+      .word{font-family:'Georgia','Times New Roman',serif;font-size:40px;fill:#1A2B3C;}
+      .word2{font-family:'Georgia','Times New Roman',serif;font-size:40px;fill:#B8791A;font-style:italic;}
+    </style>
+  </defs>
+  <polygon points="30,20 36,34 50,34 39,43 43,58 30,49 17,58 21,43 10,34 24,34" fill="#B8791A"/>
+  <text x="62" y="46" class="word">Atelier</text>
+  <text x="62" y="80" class="word2">Nova</text>
+</svg>
