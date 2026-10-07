@@ -37,7 +37,7 @@ hors périmètre (ex. pas de facturation, pas de messagerie intégrée).
 📋 **Prompt à coller (en Build)**
 
 ```text
-Construis la liste des tâches du mariage : titre, responsable,
+Construis la liste des tâches de l'événement : titre, responsable,
 échéance, statut (À faire, En cours, Terminé, Bloqué). Ajoute cinq
 tâches fictives pour démarrer (traiteur, fleuriste, plan de salle,
 invitations, musique).
