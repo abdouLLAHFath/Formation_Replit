@@ -67,13 +67,13 @@ Affiche la liste des leads dans un écran réservé à l'équipe.
 ## Étape 4 · Connecteur et MCP · ⏱️ 20 min
 
 1. Dans la barre latérale, ouvrez **Integrations**.
-2. Recherchez **Google Drive** ou **Slack**, choisissez un compte de **test**.
+2. Recherchez **Google Drive**  choisissez un compte de **test**.
 
 📋 **Prompt à coller (connecteur natif)**
 
 ```text
 Quand un nouveau lead est créé, dépose un résumé dans un dossier de
-test sur le Drive connecté (ou envoie-le dans un canal Slack de test).
+test sur le Drive connecté.
 ```
 
 3. Installez ensuite un serveur MCP en un clic, et utilisez-le une fois dans le chat.
