@@ -1,6 +1,6 @@
 # LAB-PROJECT-MANAGEMENT · Suivi de projet
 
-> **En une phrase —** Un mariage de 120 invités à organiser pour Atelier Nova : un besoin décrit en Plan, transformé en tâches suivies en Build, puis un bug volontaire corrigé avec la méthode du point de retour.
+> **En une phrase —** Un événement de 120 invités à organiser pour Atelier Nova : un besoin décrit en Plan, transformé en tâches suivies en Build, puis un bug volontaire corrigé avec la méthode du point de retour.
 
 | ⏱️ Durée | 📂 Où | 🧩 Avant ce lab |
 |:---:|:---:|:---:|
