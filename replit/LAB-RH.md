@@ -164,6 +164,27 @@ personnelles actuellement stockées pour une candidature.
 > La liste des données personnelles stockées, et un score qui ne change pas quand seul l'âge ou le prénom change.
 
 ---
+## Etape 10· un CV mal lu · ⏱️ 15 min
+
+Projet `rh-tri-cv`.
+
+1. Reprenez **CAND-02** (un profil d'ingénieur logiciel senior, hors sujet pour un poste de coordinateur administratif, déjà présent dans `data/candidats.csv`).
+2. Observez le score que l'IA lui donne.
+
+📋 **Prompt à coller (en Plan)**
+
+```text
+Explique pourquoi CAND-02, qui a un profil d'ingénieur logiciel
+senior et postule à un poste de coordinateur administratif, obtient
+le score qu'il obtient. Ne modifie rien.
+```
+
+3. Corrigez en Build pour que le score reflète clairement l'inadéquation, avec l'explication qui le dit explicitement.
+
+> [!TIP]
+> **✅ Vous devez voir**
+> Un score bas, avec une explication qui nomme l'inadéquation de métier — pas un score moyen sans justification.
+
 
 ## ✅ Point de contrôle
 - [ ] Cahier des charges v0 et plan de développement écrits.
