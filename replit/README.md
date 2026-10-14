@@ -103,8 +103,3 @@ Ce parcours suit la logique pédagogique des fichiers et prépare à affronter l
 
 ---
 
-Si vous voulez que je mette à jour ce README pour ajouter :
-- un sommaire détaillé des 40 diapositives ;
-- des liens directs vers des fichiers précis dans `replit/data/` ;
-- une version anglaise ;
-faites-le moi savoir et je l'ajouterai.
