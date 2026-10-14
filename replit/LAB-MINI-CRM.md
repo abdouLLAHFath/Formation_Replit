@@ -163,6 +163,25 @@ filtrée (CSV ou Excel).
 > Une relance visible et triable par date, un export qui s'ouvre et correspond au filtre appliqué.
 
 ---
+Étape 9 ·  un lien cassé · ⏱️ 15 min
+
+Projet `atelier-nova-crm`.
+
+1. Modifiez volontairement le formulaire de contact pour qu'il ne crée plus de lead (par exemple, en changeant le nom du champ attendu côté CRM).
+
+📋 **Prompt à coller (à des fins de démonstration)**
+
+```text
+Renomme le champ « besoin » du formulaire en « message », sans mettre
+à jour le mini CRM qui attend encore « besoin ».
+```
+
+2. Envoyez un formulaire test : constatez qu'aucun lead n'apparaît.
+3. Diagnostiquez en Plan, corrigez en Build, retestez.
+
+> [!TIP]
+> **✅ Vous devez voir**
+> Après correction, le formulaire test crée à nouveau un lead visible.
 
 ## ✅ Point de contrôle
 - [ ] Site publié avec logo et images réellement affichés.
