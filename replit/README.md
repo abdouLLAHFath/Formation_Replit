@@ -1,8 +1,8 @@
-# Formation Replit — Atelier Nova
+# Formation Replit — Atelier pratique
 
-Ce dépôt rassemble les supports et les labos pratiques d'une formation sur Replit, centrée sur une entreprise fictive : Atelier Nova (agence d'événementiel).
+Ce dépôt rassemble les supports et les labos pratiques d'une formation sur Replit, centrée sur une approche pédagogique concrète et progressive.
 
-Objectif : apprendre à concevoir, développer, tester, sécuriser et déployer des applications métier en tirant parti de l'Agent Replit — en travaillant par étapes courtes (Plan → Build → Test → Debug → point de retour).
+Objectif : apprendre à concevoir, développer, tester, sécuriser et déployer des applications métier en tirant parti de l'Agent Replit — en travaillant par étapes courtes (Plan → Build → Test → Debug).
 
 ---
 
@@ -102,4 +102,3 @@ Ce parcours suit la logique pédagogique des fichiers et prépare à affronter l
 - Tarifs et plans : https://replit.com/pricing (vérifier avant la session)
 
 ---
-
