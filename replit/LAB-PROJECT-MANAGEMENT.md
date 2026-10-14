@@ -89,6 +89,18 @@ puisse m'entraîner à diagnostiquer ce bug.
 > Le statut persiste correctement après correction, et un retour arrière testé au moins une fois pendant le lab.
 
 ---
+## Étape 5 · Projet — un statut non sauvegardé · ⏱️ 15 min
+
+Projet `atelier-nova-projets`.
+
+1. Changez le statut d'une tâche, rechargez la page.
+2. Si le statut est revenu en arrière, diagnostiquez en Plan, corrigez en Build.
+3. Si la correction aggrave la situation (par exemple, plus aucun statut ne s'affiche), revenez au point de retour précédent.
+
+> [!TIP]
+> **✅ Vous devez voir**
+> Le statut persiste après correction, et un retour arrière pratiqué si la première correction a aggravé le problème.
+
 
 ## ✅ Point de contrôle
 - [ ] User stories, critères et hors périmètre écrits.
