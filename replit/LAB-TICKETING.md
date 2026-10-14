@@ -119,6 +119,25 @@ n'est ni Sales ni Super Sale, ou qui est inactif. Ne modifie rien.
 > Après correction, l'assignation à un utilisateur non éligible est refusée ou impossible à sélectionner.
 
 ---
+## Étape 7 · Ticketing — une assignation invalide · ⏱️ 15 min
+
+Projet `atelier-nova-tickets`.
+
+1. Essayez d'assigner un ticket à un utilisateur Marketing (ni Sales, ni Super Sale).
+
+📋 **Prompt à coller (en Plan)**
+
+```text
+Explique pourquoi ce ticket a pu être assigné à un utilisateur
+Marketing. Ne modifie rien.
+```
+
+2. Corrigez en Build pour que seuls les utilisateurs Sales et Super Sale actifs soient proposés.
+
+> [!TIP]
+> **✅ Vous devez voir**
+> L'assignation à un utilisateur Marketing devient impossible ou refusée.
+
 
 ## ✅ Point de contrôle
 - [ ] Ticket créé par le formulaire public, en Open, non assigné.
