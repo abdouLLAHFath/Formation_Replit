@@ -1,46 +1,110 @@
-# Concevoir, développer, tester, sécuriser et déployer une application métier avec Replit
+# Formation Replit — Atelier Nova
 
-**Une formation pratique pour maîtriser [Replit](https://replit.com) et son Agent IA, construite sur une seule entreprise fictive — Atelier Nova — à travers neuf labs, un par fil métier ou par notion.**
+Ce dépôt rassemble les supports et les labos pratiques d'une formation sur Replit, centrée sur une entreprise fictive : Atelier Nova (agence d'événementiel).
+
+Objectif : apprendre à concevoir, développer, tester, sécuriser et déployer des applications métier en tirant parti de l'Agent Replit — en travaillant par étapes courtes (Plan → Build → Test → Debug → point de retour).
 
 ---
 
-## Où se trouve la formation
+## Contenu du dépôt
 
-| Élément | Emplacement |
-|---|---|
-| **Labs** (9, un par fil) et données fournies | [`replit/`](replit/) — voir son [README](replit/README.md) pour le détail |
-| **Présentation** (diapositives, 45 pages) | 
+- Dossier principal des labs : `replit/` (fichiers Markdown pour chaque lab, jeux de données dans `replit/data/`).
+- Diaporama complet de présentation : `replit/replit-presentation-globale.html` (40 diapositives, 8 parties) — utile pour une vue d'ensemble et comme support de cours.
 
-## Présentation
+Structure (extrait) :
 
-Cette formation apprend à transformer un besoin métier en application fonctionnelle avec Replit et son Agent IA. Elle ne se limite pas à « générer une application avec l'IA » : elle apprend à **concevoir, construire, tester, sécuriser, déployer et documenter**, en suivant les neuf éléments fondamentaux de Replit (modes Plan et Build, Assets, Import, Secrets, lecture du code, bibliothèques, intégrations/MCP, routines).
+```text
+replit/
+├── replit-presentation-globale.html   # diaporama 40 slides
+├── LAB-1-SOCLE.md
+├── LAB-2-MINI-CRM.md
+├── LAB-3-PROJECT-MANAGEMENT.md
+├── LAB-4-RH.md
+├── LAB-5-TICKETING.md
+├── data/
+```
 
-Cinq fils métier, construits sur **Atelier Nova** (agence d'événementiel et de décoration de 12 personnes), servent de fil conducteur : RH, Ticketing, Finance, Project Management et un mini CRM — chacun est un **lab unique**, découpé en étapes d'au plus 20 minutes.
+---
 
-## Public et prérequis
+## À qui s'adresse la formation
 
-- **Public** : étudiants  et professionnels qui veulent concevoir une application métier avec l'IA, quel que soit leur domaine.
-- **Prérequis** : aucun en programmation. Le code généré par l'Agent est lu et compris, pas écrit à la main.
-- **Matériel** : un ordinateur, une connexion internet, un compte Replit avec l'Agent et le déploiement activés.
+- Débutants en programmation et professionnels souhaitant prototyper une application métier rapidement.
+- Public de formation et enseignants voulant montrer le cycle complet : besoin → prototype → test → déploiement.
 
-## Durée et format
+Prérequis : aucun en programmation. Un compte Replit (Starter suffit pour la plupart des labs), un navigateur et une connexion Internet.
 
-- **Environ 20 h 30** au total : labs (14 h 35) et théorie (3 h 10), le reste en démonstrations et pauses.
-- **Méthode** : un apport théorique court précède chaque lab ; l'essentiel du temps est passé à construire, tester et corriger dans Replit.
+---
 
-## Les 9 labs
+## Que couvre la formation (en un coup d'œil)
 
-| # | Lab | Étapes | Durée |
-|---|---|:---:|:---:|
-| 1 | Replit Agent et socle | 3 | 55 min |
-| 2 | RH · Tri et score de CV | 9 | 2 h 40 |
-| 3 | Ticketing · Suivi des demandes | 6 | 1 h 45 |
-| 4 | Finance · Clôture comptable | 6 | 2 h |
-| 5 | Lecture du code et bibliothèques | 4 | 1 h |
-| 6 | Project Management | 4 | 1 h 15 |
-| 7 | *(théorie seule : import et assets)* | — | 20 min |
-| 8 | Mini CRM · Site, formulaire, leads et prospects | 9 | 2 h 55 |
-| 9 | Débogage · Cinq cas, un par fil | 5 cas | 1 h 15 |
-| 10 | Routines, secrets et mise en ligne | 3 | 50 min |
+Le diaporama `replit-presentation-globale.html` et les labs couvrent :
 
-Le bloc 11 (récapitulatif) clôt la formation en théorie, sans lab. Détail complet, prompts à coller et données fournies : [`/README.md`](replit/README.md).
+- Création de compte et plans (Starter / Core / Pro / Enterprise) — limites et points à vérifier.
+- L'Agent Replit : modes Plan et Build, prompts structurés, Routines, points de retour.
+- Environnement : éditeur, Console / Shell, checkpoints, collaboration en direct.
+- Données & sécurité : Secrets, Replit Database, Postgres intégré, bonnes pratiques.
+- Déploiement : types (Autoscale, Static, Reserved VM, Scheduled), suivi, logs et coûts.
+- Cas pratiques par fil métier : RH (tri et scoring CV), Ticketing, Project Management, Mini CRM, Debugging.
+
+---
+
+## Les labs disponibles
+
+Chaque lab est un guide pas à pas (prompts prêts à coller, objectifs, vérifications) :
+
+- LAB-1-SOCLE.md — Replit Agent et prise en main (Plan / Build / point de retour)
+- LAB-2-MINI-CRM.md — Site vitrine, formulaire, mini CRM, conversion lead→prospect
+- LAB-3-PROJECT-MANAGEMENT.md — Suivi de projet : tâches, statuts, bug volontaire
+- LAB-4-RH.md — Tri et scoring de CV assisté par IA (DeepSeek), décisions humaines
+- LAB-5-TICKETING.md — Formulaire public, tickets, assignation, filtres et validation
+
+Consultez chaque fichier pour les prompts, la durée estimée et les points de contrôle.
+
+---
+
+## Méthode pédagogique
+
+- Plan : définir le besoin et découper la tâche (lecture seule — aucun fichier modifié).
+- Build : laisser l'Agent générer/modifier le code (un point de retour est créé pour chaque tâche).
+- Test : valider le comportement visible (preview / déploiement local).
+- Debug : diagnostiquer à partir des logs/console, corriger et retester.
+- Retour arrière : utiliser les checkpoints si une modification aggrave la situation.
+
+Règle pratique : "un prompt — un test — un point de retour".
+
+---
+
+## Sécurité et bonnes pratiques
+
+- Ne jamais stocker de clés dans le code : utiliser l'onglet Secrets et des variables d'environnement.
+- En formation, n'utilisez que des données factices.
+- Relire systématiquement le code généré avant publication.
+- Restreindre les permissions des clés externes au strict nécessaire.
+
+---
+
+## Parcours recommandé
+
+1. LAB-1 — Socle et prise en main
+2. LAB-4 — RH (IA & données sensibles)
+3. LAB-5 — Ticketing (formulaire public → ticket)
+4. LAB-3 — Project Management (tâches et suivi)
+5. LAB-2 — Mini CRM (site vitrine, leads et prospection)
+
+Ce parcours suit la logique pédagogique des fichiers et prépare à affronter les cas de debug et de sécurité.
+
+---
+
+## Ressources
+
+- Diaporama (présentation globale) : `replit/replit-presentation-globale.html` — 40 diapositives, 8 parties
+- Documentation Replit : https://docs.replit.com
+- Tarifs et plans : https://replit.com/pricing (vérifier avant la session)
+
+---
+
+Si vous voulez que je mette à jour ce README pour ajouter :
+- un sommaire détaillé des 40 diapositives ;
+- des liens directs vers des fichiers précis dans `replit/data/` ;
+- une version anglaise ;
+faites-le moi savoir et je l'ajouterai.
