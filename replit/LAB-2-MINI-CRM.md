@@ -208,4 +208,3 @@ Renomme le champ « besoin » du formulaire en « message », sans mettre
 
 ---
 
-➡️ **Lab suivant :** [LAB-DEBOGAGE · Cinq cas, un par fil](LAB-DEBOGAGE.md)
