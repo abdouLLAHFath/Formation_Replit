@@ -119,7 +119,7 @@ n'est ni Sales ni Super Sale, ou qui est inactif. Ne modifie rien.
 > Après correction, l'assignation à un utilisateur non éligible est refusée ou impossible à sélectionner.
 
 ---
-## Étape 7 · Ticketing — une assignation invalide · ⏱️ 15 min
+## Étape 7 · Ticketing . une assignation invalide · ⏱️ 15 min
 
 Projet `atelier-nova-tickets`.
 
