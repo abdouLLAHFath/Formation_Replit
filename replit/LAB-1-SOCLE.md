@@ -17,7 +17,7 @@
 
 1. Allez sur **replit.com** et créez un compte (email ou SSO).
 2. Choisissez une offre. Pour cette formation, **Starter** (gratuite) suffit ; l'étape Routines du bloc 10 vous dira si votre offre a une limite.
-3. Cliquez sur **New**, choisissez l'artifact **Web app**, nommez le projet `atelier-nova-accueil`.
+3. Cliquez sur **New**, choisissez l'artifact **Web sit**, nommez le projet `atelier-nova-accueil`.
 
 > [!IMPORTANT]
 > **💳 Avant de continuer**
