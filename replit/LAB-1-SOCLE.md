@@ -124,4 +124,4 @@ construire.
 
 ---
 
-➡️ **Lab suivant :** [LAB-RH · Tri et score de CV](LAB-RH.md)
+➡️ **Lab suivant :** [LAB-2-MINI-CRM](LAB-2-MINI-CRM.md)
