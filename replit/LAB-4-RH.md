@@ -1,6 +1,6 @@
 # LAB-RH · Tri et score de CV
 
-> **En une phrase —** Un poste à pourvoir chez Atelier Nova, des CV fictifs importés, une IA qui extrait et score sans jamais décider, et un recruteur qui garde la main jusqu'au bout.
+> **En une phrase -** Un poste à pourvoir chez Atelier Nova, des CV fictifs importés, une IA qui extrait et score sans jamais décider, et un recruteur qui garde la main jusqu'au bout.
 
 | ⏱️ Durée | 📂 Où | 🧩 Avant ce lab |
 |:---:|:---:|:---:|
