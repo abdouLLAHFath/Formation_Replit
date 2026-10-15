@@ -1,4 +1,4 @@
-# Formation Replit — Atelier pratique
+# Formation Replit - Atelier pratique
 
 Ce dépôt rassemble les supports et les labos pratiques d'une formation sur Replit, centrée sur une approche pédagogique concrète et progressive.
 
