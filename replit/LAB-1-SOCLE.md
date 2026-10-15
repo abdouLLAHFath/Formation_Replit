@@ -4,7 +4,7 @@
 
 | ⏱️ Durée | 📂 Où | 🧩 Avant ce lab |
 |:---:|:---:|:---:|
-| 55 min (3 étapes) | replit.com, nouvel artifact `Web app` | Aucun |
+| 55 min (3 étapes) | replit.com, nouvel artifact `Web site` | Aucun |
 
 ## 🎯 À la fin de ce lab
 - Vous avez un compte Replit, créé en connaissance de l'offre et des crédits, et une page publiée avec une URL publique.
