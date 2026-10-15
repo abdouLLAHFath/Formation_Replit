@@ -125,4 +125,4 @@ Projet `atelier-nova-projets`.
 
 ---
 
-➡️ **Lab suivant :** [LAB-MINI-CRM · Site, formulaire et mini CRM](LAB-MINI-CRM.md)
+➡️ **Lab suivant :** [LAB-RH · Site](LAB-4-RH.md)
