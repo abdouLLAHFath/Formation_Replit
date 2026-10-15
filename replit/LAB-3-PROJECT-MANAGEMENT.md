@@ -89,7 +89,7 @@ puisse m'entraîner à diagnostiquer ce bug.
 > Le statut persiste correctement après correction, et un retour arrière testé au moins une fois pendant le lab.
 
 ---
-## Étape 5 · Projet — un statut non sauvegardé · ⏱️ 15 min
+## Étape 5 · Projet . un statut non sauvegardé · ⏱️ 15 min
 
 Projet `atelier-nova-projets`.
 
