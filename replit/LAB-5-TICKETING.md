@@ -164,4 +164,3 @@ Marketing. Ne modifie rien.
 
 ---
 
-➡️ **Lab suivant :** [LAB-FINANCE · Clôture comptable](LAB-FINANCE.md)
